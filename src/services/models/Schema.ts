@@ -34,6 +34,7 @@ export class SchemaModel {
   typePrefix: string = '';
   title: string;
   description: string;
+  descriptionClass?: string;
   externalDocs?: OpenAPIExternalDocumentation;
 
   isPrimitive: boolean;
@@ -119,6 +120,7 @@ export class SchemaModel {
     this.title =
       schema.title || (isNamedDefinition(this.pointer) && JsonPointer.baseName(this.pointer)) || '';
     this.description = schema.description || '';
+    this.descriptionClass = schema.descriptionClass || '';
     this.type = schema.type || detectType(schema);
     this.format = schema.format;
     this.enum = schema.enum || [];

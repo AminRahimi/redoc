@@ -1,0 +1,1422 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "وب سرویس های کاتب",
+        "version": "1.0",
+        "description": "توضیحات وب سرویس های کاتب",
+        "contact": {
+            "name": "ویراتک"
+        },
+        "x-logo": {
+            "name": "Kateb",
+            "url": "slide.jpg"
+        }
+    },
+    "host": "kateb.com",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+            "/oauth/token": {
+            "post": {
+                "summary": "دریافت توکن",
+                "description": "دریافت توکن oauth",
+                "tags": ["oAuth"],
+                "operationId": "Get OAuthToken",
+                "parameters": [
+                    {
+                        "name": "grant_type",
+                        "in": "query",
+                        "description": "نوع احراز هویت",
+                        "example": "client_credentials",
+                        "required": true,
+                        "type" : "string"
+                    }
+                ],
+                "externalDocs": {
+                    "url": ""
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "encoding": "",
+                                "example": {
+                                    "access_token": "5022ffa1-bd7e-4fda-b1e9-4ded7799ad88",
+                                    "token_type": "bearer",
+                                    "expires_in": 3358206,
+                                    "scope": "read"
+                                }
+                            }
+                        },
+                        "x-last-modified": 1606559099619,
+                        "description": "توکن oAuth"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "encoding": "",
+                                "example": {
+                                    "error": "unauthorized",
+                                    "error_description": "Bad credentials"
+                                }
+                            }
+                        },
+                        "x-last-modified": 1606559099619
+                    }
+                },
+                
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --request POST \\\n  -u username:password http://{kateb_url}/Kateb/oauth/token?grant_type=client_credentials "
+                                    }
+          
+                            ]
+            },
+            "x-last-modified": 1606558816730
+        },
+        "/api/external/v1/file/upload": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "آپلود فایل",
+                "description": "وب سرویس آپلود فایل",
+                "tags": ["File"],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                  ],
+                               "properties": {
+                                  "file": {
+                                     "type": "string",
+                                     "format": "binary"
+                                  }
+                               }
+                            }
+                         }
+                    }
+                 },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "name": "letter.docx",
+                                        "hash": "XQDINTFSS1ATZG5ZLCZ2TEQLYWQYL0O1BCCNCOVR"
+                                    }
+                                ]
+                            }
+                        },
+                        "description": "اطلاعات فایل آپلود شده",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://kateb.ir/Kateb/api/external/v1/file/upload' \\\n
+                                                        --header 'Authorization: Bearer 0f4e4679-9e28-4be8-83a1-c22493a7aa59' \\\n
+                                                        --form 'file=@\"/home/user/work/letter.pdf\"' "
+                                    }
+    
+                            ]
+            },
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/v1/user/employment_order/": {
+            "get": {
+                "summary": "دریافت حکم کارگزینی",
+                "description": "وب سرویس دریافت حکم کارگزینی کاربران",
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/pdf": {
+                                "example": ""
+                            }
+                        },
+                        "description": "حکم کارگزینی",
+                        "x-last-modified": 1605010097513
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{kateb_url}/api/external/v1/user/employment_order/?username={username}&year={year}&month={month}' \\\n
+                                                        --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                    }
+          
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "kateb",
+                    "name": "username",
+                    "description": "کد پرسنلی کاربر",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "example": "1399",
+                    "name": "year",
+                    "description": "سال (سال ارسالی باید چهار رفم و بر اساس سال های شمسی باشد)",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "example": "3",
+                    "name": "month",
+                    "description": "ماه (ماه ارسالی باید از بین اعداد یک تا دوازده باشد)",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1605008410300
+        },
+        "/api/external/auto_login/get_token/": {
+            "get": {
+                "summary": "دریافت توکن",
+                "description": "وب سرویس دریافت توکن به جهت لاگین کاربر",
+                "tags": ["Auto Login"],
+                "responses": {
+                    "307": {
+                        "description": "صفحه انتخاب نام کاربری",
+                        "x-last-modified": 1605010097513
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{kateb_url}/api/external/auto_login/get_token/?nationCode={nationCode}' \\\n
+                                                        --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                    }
+          
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "1234567890",
+                    "name": "nationCode",
+                    "description": "کد ملی کاربر",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1605008410300
+        },
+        "/api/external/v1/user/signature/": {
+            "get": {
+                "summary": "دریافت تصویر امضا",
+                "description": "وب سرویس دریافت تصویر امضای کاربر",
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "image/*": {
+                                "example": ""
+                            }
+                        },
+                        "description": "تصویر امضای کاربر",
+                        "x-last-modified": 1605010097513
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{kateb_url}/api/external/v1/user/signature/?username=' \\\n
+                                                        --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                    }
+          
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "kateb",
+                    "name": "username",
+                    "description": "نام کاربری",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1605008410300
+        },
+        "/api/external/v1/org/{org_uid}/letter/item/": {
+            "produces": [
+                "application/json"
+            ],
+            "get": {
+                "summary": "دریافت اطلاعات نامه",
+                "description": "دریافت اطلاعات نامه با شماره داخلی یا اندیکاتور",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "totalCount": 1,
+                                    "items": [
+                                        {
+                                            "uid": "uid",
+                                            "subject": "string",
+                                            "dirType": "Incomming",
+                                            "type": "ORIGINAL",
+                                            "officialDate": 1606286250022,
+                                            "textBody": null,
+                                            "deliveries": [
+                                                {
+                                                    "uid": "uid",
+                                                    "deliveryUid": null,
+                                                    "description": "",
+                                                    "title": "string",
+                                                    "type": "INSIDE_POSITION",
+                                                    "dispatches": []
+                                                },
+                                                {
+                                                    "uid": "uid",
+                                                    "deliveryUid": null,
+                                                    "description": "",
+                                                    "title": "string",
+                                                    "type": "INSIDE_POSITION",
+                                                    "dispatches": []
+                                                }
+                                            ],
+                                            "creationDate": 1606286288351,
+                                            "responseDate": null,
+                                            "internalNumber": "1004",
+                                            "internalCounter": 1004,
+                                            "indicatorNumber": null,
+                                            "lastModify": 1606286288351,
+                                            "initiation": {
+                                                "uid": null,
+                                                "type": "FromSecretariatManually",
+                                                "realCreator": {
+                                                    "uid": "uid",
+                                                    "title": "string"
+                                                },
+                                                "header": null,
+                                                "sender": {
+                                                    "uid": "uid",
+                                                    "title": "string"
+                                                },
+                                                "actor": null,
+                                                "draft": null,
+                                                "externalNumber": "123",
+                                                "receivingDescription": null,
+                                                "initiatingOperator": {
+                                                    "uid": "uid",
+                                                    "title": "string"
+                                                },
+                                                "initiatingSecretariat": {
+                                                    "uid": "uid",
+                                                    "title": "string"
+                                                },
+                                                "originalityType": "Orginal",
+                                                "receivingStyle": "COURIER",
+                                                "pageSize": "A4"
+                                            },
+                                            "priority": "Normal",
+                                            "confidentialityLevel": "Unclassified"
+                                        }
+                                    ],
+                                    "fields": []
+                                }
+                            }
+                        },
+                        "description": "اطلاعات نامه",
+                        "x-last-modified": 1605013143154
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{kateb_url}/api/external/v1/org//letter/item/?number=12&indicator=12&start=0&len=10&extent=full' \\\n
+                                                        --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                    }
+          
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "12345",
+                    "name": "number",
+                    "description": "شماره داخلی نامه",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "example": "12345",
+                    "name": "indicator",
+                    "description": "اندیکاتور",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "example": "uuid",
+                    "name": "org_uid",
+                    "description": "شماره یکتای سازمان",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "example": "0",
+                    "name": "start",
+                    "description": " شماره شروع",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "example": "10",
+                    "name": "len",
+                    "description": "طول لیست",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "deprecated": false,
+                    "example": "full",
+                    "name": "extent",
+                    "description": "نوع لیست - full=نمایش کامل جزییات - brief=نمایش چکیده جزییات",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1605012648970
+        },
+      "/api/external/v1/org/{org_uid}/letter_form_type/items": {
+        "produces": [
+          "application/json"
+        ],
+        "get": {
+          "summary": "دریافت اطلاعات فرم های نامه",
+          "description": "دریافت اطلاعات فرم های نامه فعال در سازمان",
+          "tags": [
+            "Letter"
+          ],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "example": {
+                    "totalCount": 4,
+                    "items": [
+                      {
+                        "uid": "0c21edb5-fd14-4b40-9b8e-131a3c6b694c",
+                        "title": "نامه پرسنلی"
+                      },
+                      {
+                        "uid": "017a1f32-7343-49b4-9f95-fdc1f20f541a",
+                        "title": "قرارداد"
+                      },
+                      {
+                        "uid": "986c0e08-712a-4c4b-9353-3d100c7e5cb1",
+                        "title": "دستورکار"
+                      },
+                      {
+                        "uid": "ab39b308-c852-43a1-b1d0-967ba3000cce",
+                        "title": "صورت جلسه"
+                      }
+                    ],
+                    "fields": [
+                      {
+                        "type": "string",
+                        "sortable": false,
+                        "key": "uid",
+                        "label": "شناسه"
+                      },
+                      {
+                        "type": "string",
+                        "sortable": false,
+                        "key": "title",
+                        "label": "عنوان"
+                      }
+                    ]
+                  }
+                }
+              },
+              "description": "اطلاعات نامه",
+              "x-last-modified": 1605013143154
+            }
+          },
+          "x-code-samples": [
+            {
+              "lang": "Shell_curl",
+              "source": "curl --location --request GET 'https://{kateb_url}/api/external/v1/org//letter/item/?number=12&indicator=12&start=0&len=10&extent=full' \\\n
+              --header
+              'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'
+              "
+            }
+          ]
+        },
+        "x-last-modified": 1605012648970
+      },
+      "/api/external/v1/letter/search": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "جستجوی نامه",
+                "description": "وب سرویس جستجوی نامه",
+                "requestBody": {
+                    "description": "اطلاعات نامه به چهت جستجو",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "org_uid" : "ddc016b3-b330-4366-98b3-c979f0af094b",
+                                "indicator_uid" : "ddc016b3-b330-4366-98b4-c979f0af094b",
+                                "letter_number" : "1234",
+                                "external_number" : "4321",
+                                "sender" : "احمدی",
+                                "tag": "فوری",
+                                "subject" : "تست",
+                                "dir_type" : "inside"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "totalCount" : 1,
+                                    "items" : [ {
+                                      "uid" : "fe5f2545-f6a7-4220-8b5b-f2bec489a2e1",
+                                      "subject" : "تست",
+                                      "dirType" : "Inside",
+                                      "type" : "ORIGINAL",
+                                      "officialDate" : 1627152470299,
+                                      "textBody" : null,
+                                      "deliveries" : [ {
+                                        "uid" : "94f216d4-ad45-4868-9553-09807e3cc369",
+                                        "deliveryUid" : null,
+                                        "description" : "",
+                                        "title" : "محمد احمدی (معاون عملیلت)",
+                                        "type" : "INSIDE_POSITION",
+                                        "deliveryType" : "TO",
+                                        "dispatches" : [ ],
+                                        "sendingSecretariat" : null,
+                                        "letterPositionAssignment" : null,
+                                        "status" : null,
+                                        "creationDate" : null,
+                                        "receiver" : {
+                                          "uid" : "6dc83583-f05a-4eea-a17a-c12c36f4fffc",
+                                          "title" : "محمد احمدی (معاون عملیلت)"
+                                        },
+                                        "externalPosition" : null,
+                                        "group" : null,
+                                        "groupNameAtTheTime" : null,
+                                        "otherOrgReceiver" : null,
+                                        "sendingOperator" : null
+                                      } ],
+                                      "creationDate" : 1627152470299,
+                                      "responseDate" : null,
+                                      "internalNumber" : "400",
+                                      "internalCounter" : 441,
+                                      "indicatorNumber" : null,
+                                      "lastModify" : 1627153420724,
+                                      "initiation" : {
+                                        "uid" : null,
+                                        "type" : "FromInside",
+                                        "realCreator" : {
+                                          "uid" : "7c4c58a2-e581-41a7-9d07-969e718e559f",
+                                          "title" : "حسین احمدی (h.ahmadi)"
+                                        },
+                                        "header" : {
+                                          "uid" : "10e7d2f0-a5e5-4d44-836b-5afeca299377",
+                                          "title" : "سربرگ جدید A4"
+                                        },
+                                        "sender" : {
+                                          "uid" : "8cd23c82-d45b-4391-8d17-4a385d37481c",
+                                          "title" : "حسین احمدی (مدیر پرفرومنس مارکتینگ)"
+                                        },
+                                        "actor" : {
+                                          "uid" : "6dc83583-f05a-4eea-a17a-c12c36f4fffc",
+                                          "title" : "محمد احمدی (معاون عملیلت)"
+                                        },
+                                        "draft" : {
+                                          "uid" : "",
+                                          "title" : ""
+                                        },
+                                        "externalNumber" : null,
+                                        "receivingDescription" : null,
+                                        "initiatingOperator" : null,
+                                        "initiatingSecretariat" : null,
+                                        "originalityType" : null,
+                                        "receivingStyle" : null,
+                                        "pageSize" : null
+                                      },
+                                      "priority" : "Normal",
+                                      "confidentialityLevel" : "Unclassified",
+                                      "forwards" : [ 
+                                         "حسین احمدی (مدیر پرفرومنس مارکتینگ)",
+                                         "اکبر محمدی (دبیرخانه)",
+                                         "جواد احمدی (مدیرعامل)",
+                                         "هادی احمدی (تست سامانه)",
+                                         "حمید احمدی (کارشناس امور قراردادها - 1)" ]
+                                    } ],
+                                    "fields" : []
+                                  }                                  
+                            }
+                        },
+                        "description": "اطلاعات نامه",
+                        "x-last-modified": 1605013143154
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request POST 'https:\/\/{kateb_url}\/api\/external\/v1\/letter\/search' \\\r\n--header 'Authorization: Bearer 8da84a47-68cf-48ec-8573-168815ba84b7' \\\r\n--header 'Content-Type: application\/json' \\\r\n--data-raw '{\r\n    \"org_uid\" : \"ddc016b3-b330-4366-98b3-c979f0af094b\",\r\n    \"indicator_uid\" : \"ddc016b3-b330-4366-98b4-c979f0af094b\",\r\n    \"letter_number\" : \"1234\",\r\n    \"external_number\" : \"4321\",\r\n    \"sender\" : \"\u0627\u062D\u0645\u062F\u06CC\",\r\n    \"tag\": \"\u0641\u0648\u0631\u06CC\",\r\n    \"subject\" : \"\u062A\u0633\u062A\"\r\n}'"
+                                    }
+          
+                            ]
+            },
+            "x-last-modified": 1605012648970
+        },
+        "/api/external/v1/org/{org_uid}/letter/send": {
+            "post": {
+                "summary": "ثبت و شماره گرفتن نامه",
+                "requestBody": {
+                    "description": "ثبت و شماره گرفتن نامه صادره",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/SendLetterBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json" : {
+                                "example": {
+                                    "uid": "d3d0f713-3c33-4085-bc58-72b1ff0be81e",
+                                    "number": "1030",
+                                    "subject": "صورت جلسه",
+                                    "officialDate": 1677586378435,
+                                    "confidentiality": "Unclassified",
+                                    "requestResponseDate": null,
+                                    "priority": "Normal",
+                                    "sender": {
+                                        "uid": "9a0e896b-840e-4e69-b510-c6040f93a36c",
+                                        "title": "عباس عباسی (مدیرعامل)"
+                                    },
+                                    "deliveryTo": [
+                                        {
+                                            "uid": "4190a4ee-7e15-4aba-a307-a245001c5ac2",
+                                            "description": "",
+                                            "title": "عباس عباسی (مدیرعامل)",
+                                            "type": "INSIDE_POSITION",
+                                            "deliveryType": "TO",
+                                            "receiver": {
+                                                "uid": "9a0e896b-840e-4e69-b510-c6040f93a36c",
+                                                "title": "عباس عباسی (مدیرعامل)"
+                                            }
+                                        }
+                                    ],
+                                    "deliveryCc": [
+                                        {
+                                            "uid": "a080db1e-67c8-4d76-ac93-a68e214ecde0",
+                                            "deliveryUid": "3102d2ad-776e-42fd-aec4-20d83a9c8bcb",
+                                            "description": "",
+                                            "title": "مدیرعامل بانک",
+                                            "type": "THROUGH_SECRETARIAT",
+                                            "deliveryType": "CC",
+                                            "sendingSecretariat": {
+                                                "uid": "56d3944a-1c76-4276-891f-78e1db3c926b",
+                                                "title": "دبیرخانه مرکزی"
+                                            },
+                                            "externalPosition": {
+                                                "uid": "a080db1e-67c8-4d76-ac93-a68e214ecde0",
+                                                "title": "مدیرعامل"
+                                            }
+                                        }
+                                    ],
+                                    "deliveryBcc": [],
+                                    "file": {
+                                        "name": "letter.pdf",
+                                        "hash": "FRM4Y86GY3CB461BT5TJQJ7HOBAMADY1QWPGEYDY",
+                                        "size": 176127
+                                    },
+                                    "attachments": [
+                                        {
+                                            "relationTypeKey": "Appendix",
+                                            "description": "نامه به پیوست ارائه گردید",
+                                            "type": "LETTER",
+                                            "letterBody": {
+                                                "uid": "df343b9a-b1af-4d00-b2d1-f8a46b4dd707",
+                                                "title": "صورت وضعیت 1027"
+                                            },
+                                            "fileBody": null
+                                        }
+                                    ],
+                                    "forms": []
+                                }
+                            }
+                        },
+                        "description": "اطلاعات نامه ثبت شده",
+                        "x-last-modified": 1605013143154
+                    }
+                },
+                "x-code-samples": [
+                                {
+                                    "lang": "Shell_curl",
+                                    "source": "curl --location --request POST 'https://{kateb_url}/api/external/v1/org/{org_uid}/letter/send/' \\\n
+                                                --header 'Content-Type: application/json' \\\n 
+                                                --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                }
+          
+                        ]
+            },
+            "parameters": [
+                {
+                    "deprecated": false,
+                    "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec",
+                    "name": "org_uid",
+                    "description": "شماره یکتای سازمان، که از طریق وب‌سرویس دریافت لیست سازمان‌ها قابل دریافت است.",
+                    "schema": {
+                        "format": "'uuid'",
+                        "pattern": "",
+                        "type": "string",
+                        "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec"
+                    },
+                    "in": "path",
+                    "required": true,
+                    "x-last-modified": 1605012522590
+                }
+            ],
+            "x-last-modified": 1605012656304
+        },
+        "/api/external/v1/letter/unReadLetters": {
+            "get": {
+                "summary": "نمایش تعداد نامه های خوانده نشده",
+                "description": "نمایش نامه های خوانده نشده به ازای هر کد پرسنلی",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "title": "string",
+                                        "count": "int"
+                                    }
+                                ]
+                            }
+                        },
+                        "description": "تعداد نامه های خوانده نشده",
+                        "x-last-modified": 1605082666661
+                    }
+                },
+                "x-code-samples": [
+                                {
+                                    "lang": "Shell_curl",
+                                    "source": "curl --location --request GET 'https://{kateb_url}/api/external/v1/letter/unReadLetters?personnelCode=' \\\n
+                                                    --header 'Authorization: Bearer 5022ffa1-bd7e-4fda-b1e9-4ded7799ad88'"
+                                }
+                    ],
+            },
+            "parameters": [
+                {
+                    "example": "kateb",
+                    "name": "personnelCode",
+                    "description": "نام کاربری",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1605013231134
+        }, 
+        "/api/external/v1/letter/view": {
+            "get": {
+                "summary": "مشاهده فایل نامه",
+                "description": "وب سرویس مشاهده فایل نامه",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/pdf": {
+                                "example": ""
+                            }
+                        },
+                        "description": "فایل نامه",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https:\/\/kateb.app\/Kateb\/api\/external\/v1\/letter\/view?identifier=598887d1-7ba5-485f-ab11-2006d2ad9164' \\\r\n--header 'Authorization: Bearer 1013f218-bbb6-4a89-8913-a8a5b1ed62da'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "598887d1-7ba5-485f-ab11-2006d2ad9164",
+                    "name": "identifier",
+                    "description": "شناسه نامه",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/v1/letter/download": {
+            "get": {
+                "summary": "دانلود فایل نامه",
+                "description": "وب سرویس دانلود فایل نامه",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/pdf": {
+                                "example": ""
+                            }
+                        },
+                        "description": "فایل نامه",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https:\/\/kateb.app\/Kateb\/api\/external\/v1\/letter\/download?identifier=598887d1-7ba5-485f-ab11-2006d2ad9164' \\\r\n--header 'Authorization: Bearer 1013f218-bbb6-4a89-8913-a8a5b1ed62da'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "598887d1-7ba5-485f-ab11-2006d2ad9164",
+                    "name": "identifier",
+                    "description": "شناسه نامه",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/v1/organization/actives": {
+            "produces": [
+                "application/json"
+            ],
+            "get": {
+                "summary": "دریافت لیست سازمان‌ها",
+                "description": "دریافت لیست سازمان‌های فعال",
+                "tags": ["Organization"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "uid": "e8d2947b-c07f-4bb0-b61d-c8bbf495615e",
+                                        "title": "سادافزار رایا"
+                                    },
+                                    {
+                                        "uid": "981bf272-ddb8-47c5-8226-e138b00769b8",
+                                        "title": "لیمو"
+                                    },
+                                    {
+                                        "uid": "6381c775-4f86-4dcb-b192-98d2522ff57f",
+                                        "title": "ویراتک شریف"
+                                    }
+                                ]
+                            }
+                        },
+                        "description": "لیست سازمان‌های فعال",
+                        "x-last-modified": 1661324098607
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://kateb.ir/Kateb/api/external/v1/organization/actives' \\\n
+                                                    --header 'Authorization: Bearer 0f4e4679-9e28-4be8-83a1-c22493a7aa59'"
+                                    }
+          
+                            ]
+            },
+            "x-last-modified": 1661324098607
+        },
+        "/api/external/v1/org/{org_uid}/delivery": {
+            "produces": [
+                "application/json"
+            ],
+            "get": {
+                "summary": "دریافت لیست گیرندگان",
+                "description": "وب‌سرویس دریافت لیست افرادی که می‌توانند به عنوان گیرنده در نامه ثبت شوند. گیرندگان در کاتب دارای سه نوع سمت(داخلی)، گروه و سازمان مخاطب(دبیرخانه) می‌باشند. ",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "totalCount": 4,
+                                    "items": [
+                                        {
+                                            "uid": "4190a4ee-7e15-4aba-a307-a245001c5ac2",
+                                            "title": "عباس عباسی (مدیرعامل)",
+                                            "type": "INSIDE_POSITION"
+                                        },
+                                        {
+                                            "uid": "f0359f48-dd5a-4b26-bff4-2faccecf3ce5",
+                                            "title": "اصغر جعفری (معاون مدیر)",
+                                            "type": "INSIDE_POSITION"
+                                        },
+                                        {
+                                            "uid": "0746108a-5ab2-4bea-81c1-725dd9d1e9ae",
+                                            "title": "کاربران عادی",
+                                            "type": "GROUP"
+                                        },
+                                        {
+                                            "uid": "a080db1e-67c8-4d76-ac93-a68e214ecde0",
+                                            "title": "مدیرعامل بانک",
+                                            "type": "THROUGH_SECRETARIAT"
+                                        }
+                                    ],
+                                    "fields": []
+                                }
+                            }
+                        },
+                        "description": "لیست افرادی که می‌توانند به عنوان گیرنده نامه انتخاب شوند.",
+                        "x-last-modified": 1661324098607
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://kateb.ir/Kateb/api/external/v1/org/{org_uid}/delivery' \\\n
+                                                    --header 'Authorization: Bearer 0f4e4679-9e28-4be8-83a1-c22493a7aa59'"
+                                    }
+          
+                            ]
+            },
+            "parameters" : [
+                {
+                    "deprecated": false,
+                    "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec",
+                    "name": "org_uid",
+                    "description": "شماره یکتای سازمان، که از طریق وب‌سرویس دریافت لیست سازمان‌ها قابل دریافت است.",
+                    "schema": {
+                        "format": "'uuid'",
+                        "pattern": "",
+                        "type": "string",
+                        "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec"
+                    },
+                    "in": "path",
+                    "required": true,
+                    "x-last-modified": 1605012522590
+                },
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "جستجو در نام گیرندگان",
+                    "example": "مدیر",
+                    "required": false,
+                    "type" : "string"
+                }
+            ],
+            "x-last-modified": 1661324098607
+        },
+        "/api/external/v1/org/{org_uid}/sender": {
+            "produces": [
+                "application/json"
+            ],
+            "get": {
+                "summary": "دریافت لیست فرستندگان",
+                "description": "وب‌سرویس دریافت لیست سمت-شخص‌هایی که می‌توانند به عنوان فرستنده(دارای اجازه‌ی امضا) در نامه ثبت شوند.",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "totalCount": 2,
+                                    "items": [
+                                        {
+                                            "uid": "9a0e896b-840e-4e69-b510-c6040f93a36c",
+                                            "title": "عباس عباسی (مدیرعامل)"
+                                        },
+                                        {
+                                            "uid": "562f3086-1537-42e8-ad2b-da1d32021883",
+                                            "title": "اصغر جعفری (معاون مدیر)"
+                                        }
+                                    ],
+                                    "fields": [
+                                        {
+                                            "type": "string",
+                                            "sortable": false,
+                                            "key": "uid",
+                                            "label": "شناسه"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "sortable": false,
+                                            "key": "title",
+                                            "label": "عنوان"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "لیست سمت-شخص‌هایی که می‌توانند به عنوان فرستنده نامه انتخاب شوند.",
+                        "x-last-modified": 1661324098607
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://kateb.ir/Kateb/api/external/v1/org/{org_uid}/delivery' \\\n
+                                                    --header 'Authorization: Bearer 0f4e4679-9e28-4be8-83a1-c22493a7aa59'"
+                                    }
+          
+                            ]
+            },
+            "parameters" : [
+                {
+                    "deprecated": false,
+                    "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec",
+                    "name": "org_uid",
+                    "description": "شماره یکتای سازمان، که از طریق وب‌سرویس دریافت لیست سازمان‌ها قابل دریافت است.",
+                    "schema": {
+                        "format": "'uuid'",
+                        "pattern": "",
+                        "type": "string",
+                        "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec"
+                    },
+                    "in": "path",
+                    "required": true,
+                    "x-last-modified": 1605012522590
+                },
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "جستجو در نام فرستندگان",
+                    "example": "مدیر",
+                    "required": false,
+                    "type" : "string"
+                }
+            ],
+            "x-last-modified": 1661324098607
+        },
+        "/api/external/v1/letter/{letter_uid}/share_link": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "ساخت لینک اشتراک‌گذاری نامه",
+                "description": "وب‌سرویس ساخت و دریافت لینک اشتراک گذاری یک نامه.",
+                "tags": ["Letter"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "uid": "ea2eb99e-e43d-40b8-8358-10777a268990",
+                                    "creator": {
+                                        "uid": "05b988ab-9bc2-44d3-bded-79634250d1bf",
+                                        "title": "داکتیو (docteav)"
+                                    },
+                                    "token": "GiK4Wj5V7u_hQiyTri46QiFODBSIa62c",
+                                    "creationDate": 1678023406402,
+                                    "disabled": false,
+                                    "targetLetter": {
+                                        "uid": "4b335233-fa32-4fcd-8719-32cfd9dc9da0",
+                                        "title": "صورت جلسه 1032"
+                                    },
+                                    "link": "https://kateb.ir/public.html?token=GiK4Wj5V7u_hQiyTri46QiFODBSIa62c"
+                                }
+                            }
+                        },
+                        "description": "آدرس لینک اشتراک گذاری و جزئیات آن.",
+                        "x-last-modified": 1661324098607
+                    }
+                },
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request POST 'https://kateb.ir/api/external/v1/letter/{letter_uid}/share_link' \\\n
+                                                    --header 'Authorization: Bearer 0f4e4679-9e28-4be8-83a1-c22493a7aa59'"
+                                    }
+          
+                            ]
+            },
+            "parameters" : [
+                {
+                    "deprecated": false,
+                    "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec",
+                    "name": "letter_uid",
+                    "description": "(این شناسه در ریسپانس ثبت و شماره گرفتن نامه موجود است و  همچنین امکان دریافت آن از طریق وب‌سرویس جستجوی نامه فراهم می‌باشد)شناسه یکتای نامه.",
+                    "schema": {
+                        "format": "'uuid'",
+                        "pattern": "",
+                        "type": "string",
+                        "example": "5ad0a2bf-8243-4a66-8934-36ddd4449bec"
+                    },
+                    "in": "path",
+                    "required": true,
+                    "x-last-modified": 1605012522590
+                }
+            ],
+            "x-last-modified": 1661324098607
+        }
+    },
+    "SendLetterBody": {
+        "required": [
+          "name",
+          "link"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string",
+            "description" : "موضوع نامه (دارای محدودیت ۲۵۵ کارکتری)",
+            "example": "صورت جلسه امروز"
+          },
+          "deliveryTo" : {
+            "type" : "array",
+            "description" : "گیرندگان نامه که از طریق وب‌سرویس دریافت لیست گیرندگان قابل دریافت است. گیرندگان نامه دارای سه نوع سمت(داخلی)، گروه و سازمان مخاطب(دبیرخانه) می‌باشد.",
+            "items" : {
+                "$ref": "#/DeliveryBody"
+            }
+          },
+          "deliveryCc" : {
+            "type" : "array",
+            "description" : "رونوشت‌های نامه که از طریق وب‌سرویس دریافت لیست گیرندگان قابل دریافت است. گیرندگان نامه دارای سه نوع سمت(داخلی)، گروه و سازمان مخاطب(دبیرخانه) می‌باشد.",
+            "items" : {
+                "$ref": "#/DeliveryBody"
+            }
+          },
+          "deliveryBcc" : {
+            "type" : "array",
+            "description" : "رونوشت‌های پنهان نامه که از طریق وب‌سرویس دریافت لیست گیرندگان قابل دریافت است. گیرندگان نامه دارای سه نوع سمت(داخلی)، گروه و سازمان مخاطب(دبیرخانه) می‌باشد.",
+            "items" : {
+                "$ref": "#/DeliveryBody"
+            }
+          },
+          "sender" : {
+            "$ref" : "#/PositionUserAssignmentBody"
+          },
+          "file" : {
+            "$ref" : "#/FileBody"
+          },
+          "attachments" : {
+            "type" : "array",
+            "description": "ضمیمه‌‌های نامه که به دو صورت نامه و فایل قابل انتخاب می‌باشد. نکته مهم: در ضمیمه، تنها یکی از فیلد‌های فایل یا نامه باید ارسال شود.",
+            "items" : {
+                "$ref": "#/AttachemtBody"
+            }
+          },
+          "forms" : {
+            "type" : "array",
+            "description" : "فرم‌های نامه که از قبل در پنل مدیریت سازمان تعریف ساخته شده و اطلاعات فرم‌های سازمان‌ها از طریق وب‌سرویس‌های دریافت لیست فرم‌های نامه قابل دسترس است. ",
+            "items" : {
+                "$ref": "#/LetterFormBody"
+            }
+          }
+        },
+        "xml": {
+          "name": "Hyperlink"
+        }
+    },
+    "LetterFormBody": {
+        "required": [
+            "letterFormType",
+            "content"
+        ],
+        "properties": {
+            "letterFormType" : {
+                "$ref" : "#/LetterFormTypeBody"
+            },
+            "content": {
+                "$ref": "#/LetterFormInstanceBody"
+            }
+        },
+        "xml": {
+          "name": "LetterFormBody"
+        }
+    },
+    "LetterFormTypeBody": {
+        "required": [
+            "uid"
+        ],
+        "description" : "توسط مدیر سامانه از قبل ساخته شده و قابل دریافت از وب‌سرویس دریافت لیست‌های نوع نامه می‌باشد.",
+        "properties": {
+            "uid": {
+                "type": "string",
+                "description": "شناسه فرم نامه",
+                "example" : "7ad90d7b-ee5b-4b4a-b7ab-571f3b30d50c"
+              },
+            "title": {
+                "type": "string",
+                "description": "نام فرم نامه",
+                "example" : "قرارداد فاوا"
+              }  
+        },
+        "xml": {
+          "name": "LetterFormBody"
+        }
+    },
+    "LetterFormInstanceBody": {
+        "description" : "محتوای فرم نامه(در این آبجکت، محتوای فرم نامه که توسط فرم‌ساز سامانه ساخته شده‌اند ارسال می‌شود، فیلدهای مختلف با استفاده از کلید یکتای آن‌ها مشخص می‌شوند.)(نکته: نمونه‌های موجود در این آبجکت صرفا جهت نمونه بوده و مقادیر کلیدهای اصلی باید از سامانه کاتب و یا وب‌سرویس‌های دریافت لیست فرم‌های نامه و دریافت ساختار فرم‌ نامه، که مستندات آن در همین سامانه در دسترسی است، استخراج شوند.)",
+        "properties": {
+            "contractor": {
+                "type": "string",
+                "description": "پیمانکار",
+                "example":"سازمان همکار"
+            },
+            "date": {
+                "type": "integer",
+                "description": "تاریخ قرارداد",
+                "example": 1682281800000
+            },
+            "employer": {
+                "type": "string",
+                "description": "کارفرما",
+                "example": "سازمان ما"
+            },
+            "price": {
+                "type": "integer",
+                "description": "مبلغ قرارداد",
+                "example": 1000000000
+            },
+            "state": {
+                "$ref" : "#/EnumTypeSample"
+            }
+        },
+        "xml": {
+          "name": "LetterFormInstanceBody"
+        }
+    },
+    "EnumTypeSample": {
+        "required": [
+            "key"
+        ],
+        "properties": {
+            "key": {
+                "type": "string",
+                "description": "پیمانکار",
+                "example": "EnumTypeMember__in_progress"
+            },
+            "lable": {
+                "type": "string",
+                "description": "تاریخ قرارداد",
+                "example": "در حال انجام"
+            }
+        },
+        "xml": {
+          "name": "EnumTypeSample"
+        }
+    },
+    "DeliveryBody": {
+        "required": [
+          "uid",
+          "type"
+        ],
+        "description" : "گیرندگان نامه که از طریق وب‌سرویس دریافت لیست گیرندگان قابل دریافت است. گیرندگان نامه دارای سه نوع سمت(داخلی)، گروه و سازمان مخاطب(دبیرخانه) باشد.",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description" : "شناسه گیرنده",
+            "example": "4190a4ee-7e15-4aba-a307-a245001c5ac2"
+          },
+          "title": {
+            "type": "string",
+            "description": "(در صورتی که شناسه گیرنده ارسال نشود و فقط عنوان گیرنده ارسال شود و همچنین نوع گیرنده نیز خارج از سامانه کاتب باشد، گیرنده به صورت متن در سامانه ذخیره می‌شود.)عنوان گیرنده",
+            "example" : "عباس عباسی (مدیرعامل)"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "(داخلی، گروه، سازمان مرتبط و خارج از سامانه کاتب)نوع گیرنده",
+            "example" : "INSIDE_POSITION",
+            "enum" : [
+                "INSIDE_POSITION",
+                "GROUP",
+                "THROUGH_SECRETARIAT",
+                "FROM_OTHER_APP"
+            ]
+          }
+        },
+        "xml": {
+          "name": "DeliveryBody"
+        }
+    },
+    "PositionUserAssignmentBody": {
+        "required": [
+          "uid",
+          "title"
+        ],
+        "description": "فرستنده نامه می‌تواند به دو صورت انتخاب شود: ۱- استفاده از سمت‌-شخص‌های فعال کاتب: در این حالت شناسه سمت-شخص از طریق وب‌سرویس دریافت لیست سمت-شخص‌های فعال دریافت شده و از آن استفاده شود. ۲- ارسال کننده از خارج از کاتب: در این حالت، در صورتی که شناسه فرستنده ارسال نشود، متن فرستاده شده در این فیلد به عنواان فرستنده نامه در نظر گرفته می‌شود.",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "شناسه سمت-شخص",
+            "example" : "9a0e896b-840e-4e69-b510-c6040f93a36c"
+          },
+          "title": {
+            "type": "string",
+            "description" : "(در صورتی که شناسه ارسال نشود، این فیلد متنی به عنوان فرستنده نامه در نظر گرفته می‌شود)عنوان",
+            "example" : "عباس عباسی (مدیرعامل)"
+          }
+        },
+        "xml": {
+          "name": "PositionUserAssignmentBody"
+        }
+    },
+    "SimpleUltraLightBody": {
+        "required": [
+          "uid"
+        ],
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "شناسه",
+            "example" : "df343b9a-b1af-4d00-b2d1-f8a46b4dd707"
+          },
+          "title": {
+            "type": "string",
+            "description": "عنوان",
+            "example" : "صورت جلسه دیروز 1027"
+          }
+        },
+        "xml": {
+          "name": "SimpleUltraLightBody"
+        }
+    },
+    "FileBody": {
+        "required": [
+          "hash"
+        ],
+        "description" : "تصویر نامه که از طریق وب‌سرویس آپلود فایل آپلود شده و می‌تواند دارای یکی از فرمت‌‌های رو به رو باشد: pdf, docx, tiff",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "description": "شناسه فایل",
+            "example" : "FRM4Y86GY3CB461BT5TJQJ7HOBAMADY1QWPGEYDY"
+          },
+          "name": {
+            "type": "string",
+            "description": "نام فایل"
+          }
+        },
+        "xml": {
+          "name": "FileBody"
+        }
+    },
+    "AttachmentFileBody": {
+        "required": [
+          "hash"
+        ],
+        "description" : "فایل ضمیمه نامه",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "description": "شناسه فایل",
+            "example" : "FRM4Y86GY3CB461BT5TJQJ7HOBAMADY1QWPGEYDY"
+          },
+          "name": {
+            "type": "string",
+            "description": "نام فایل"
+          }
+        },
+        "xml": {
+          "name": "FileBody"
+        }
+    },
+    "AttachemtBody": {
+        "required": [
+          "relationTypeKey",
+          "type",
+          "fileBody",
+          "letterBody"
+        ],
+        "properties": {
+          "relationTypeKey": {
+            "type": "string",
+            "description": "نوع ضمیمه (عطف، پیرو، پیوست و ارتباط)",
+            "example" : "Appendix",
+            "enum" : [
+                "Turn",
+                "Follow",
+                "Appendix",
+                "Relation"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "example" : "نامه به پیوست ارائه گردید",
+            "description": "توضیحات ضمیمه"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "(نامه و فایل)نوع ضمیمه",
+            "example" : "LETTER",
+            "enum" : [
+                "LETTER",
+                "FILE"
+            ]
+          },
+          "letterBody" : {
+            "description" : "در صورتی که نوع ضمیمه نامه باشد، فقط این فیلد باید ارسال گردد.",
+            "$ref" : "#/SimpleUltraLightBody"
+          },
+          "fileBody" : {
+            "description" : "در صورتی که نوع ضمیمه فایل باشد، فقط این فیلد باید ارسال گردد.",
+            "$ref" : "#/AttachmentFileBody"
+          }
+        },
+        "xml": {
+          "name": "AttachemtFileBody"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "JWTAuth": {
+                "type": "http",
+                "description": "Authorization: Bearer <token>",
+                "scheme": "Bearer",
+                "bearerFormat": "5022ffa1-bd7e-4fda-b1e9-4ded7799ad8"
+            }
+        },
+        "schemas": {},
+        "responses": {},
+        "parameters": {}
+    },
+    "security": [
+        {
+            "JWTAuth": []
+        }
+    ],
+    "tags": [],
+    "servers": [
+        {
+            "url": "https://api.example.io"
+        }
+    ],
+    "externalDocs": {
+        "url": ""
+    }
+}

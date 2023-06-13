@@ -25,13 +25,15 @@ export class Markdown extends React.Component<MarkdownProps> {
     const { source, inline, compact, className, 'data-role': dataRole } = this.props;
     const renderer = new MarkdownRenderer();
     return (
-      <SanitizedMarkdownHTML
-        html={renderer.renderMd(source)}
-        inline={inline}
-        compact={compact}
-        className={className}
-        data-role={dataRole}
-      />
+      <div className='Markdown_html'>
+        <SanitizedMarkdownHTML
+          html={renderer.renderMd(source)}
+          inline={inline}
+          compact={compact}
+          className={className}
+          data-role={dataRole}
+        />
+      </div>
     );
   }
 }

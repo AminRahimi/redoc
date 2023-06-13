@@ -106,8 +106,12 @@ export class ApiInfo extends React.Component<ApiInfoProps> {
               )) ||
                 null}
             </StyledMarkdownBlock>
-            <Markdown source={store.spec.info.summary} data-role="redoc-summary" />
-            <Markdown source={store.spec.info.description} data-role="redoc-description" />
+            <span className='ApiInfo_redoc-summary'>
+              <Markdown source={store.spec.info.summary} className={store.spec.info.summaryClass} data-role="redoc-summary" />
+            </span>
+            <span className='ApiInfo_redoc-description'>
+              <Markdown source={store.spec.info.description} className={store.spec.info.descriptionClass} data-role="redoc-description" />
+            </span>
             {externalDocs && <ExternalDocumentation externalDocs={externalDocs} />}
           </MiddlePanel>
         </Row>

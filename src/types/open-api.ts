@@ -18,7 +18,9 @@ export interface OpenAPIInfo {
   version: string;
 
   description?: string;
+  descriptionClass?: string;
   summary?: string;
+  summaryClass?: string;
   termsOfService?: string;
   contact?: OpenAPIContact;
   license?: OpenAPILicense;
@@ -27,6 +29,7 @@ export interface OpenAPIInfo {
 export interface OpenAPIServer {
   url: string;
   description?: string;
+  descriptionClass?: string;
   variables?: { [name: string]: OpenAPIServerVariable };
 }
 
@@ -34,6 +37,7 @@ export interface OpenAPIServerVariable {
   enum?: string[];
   default: string;
   description?: string;
+  descriptionClass?: string;
 }
 
 export interface OpenAPIPaths {
@@ -43,14 +47,18 @@ export interface OpenAPIRef {
   'x-refsStack'?: string[];
   $ref: string;
   summary?: string;
+  summaryClass?: string;
   description?: string;
+  descriptionClass?: string;
 }
 
 export type Referenced<T> = OpenAPIRef | T;
 
 export interface OpenAPIPath {
   summary?: string;
+  summaryClass?: string;
   description?: string;
+  descriptionClass?: string;
   get?: OpenAPIOperation;
   put?: OpenAPIOperation;
   post?: OpenAPIOperation;
@@ -68,12 +76,14 @@ export interface OpenAPIXCodeSample {
   lang: string;
   label?: string;
   source: string;
+  sourceClass?: string;
 }
 
 export interface OpenAPIOperation {
   tags?: string[];
   summary?: string;
   description?: string;
+  descriptionClass?: string;
   externalDocs?: OpenAPIExternalDocumentation;
   operationId?: string;
   parameters?: Array<Referenced<OpenAPIParameter>>;
@@ -109,7 +119,9 @@ export interface OpenAPIParameter {
 export interface OpenAPIExample {
   value: any;
   summary?: string;
+  summaryClass?: string;
   description?: string;
+  descriptionClass?: string;
   externalValue?: string;
 }
 
@@ -121,6 +133,7 @@ export interface OpenAPISchema {
   additionalProperties?: boolean | OpenAPISchema;
   unevaluatedProperties?: boolean | OpenAPISchema;
   description?: string;
+  descriptionClass?: string;
   default?: any;
   items?: OpenAPISchema | OpenAPISchema[] | boolean;
   required?: string[];
@@ -248,6 +261,7 @@ export interface OpenAPISecurityRequirement {
 export interface OpenAPISecurityScheme {
   type: 'apiKey' | 'http' | 'oauth2' | 'openIdConnect';
   description?: string;
+  descriptionClass?: string;
   name?: string;
   in?: 'query' | 'header' | 'cookie';
   scheme?: string;
@@ -280,6 +294,7 @@ export interface OpenAPISecurityScheme {
 export interface OpenAPITag {
   name: string;
   description?: string;
+  descriptionClass?: string;
   externalDocs?: OpenAPIExternalDocumentation;
   'x-displayName'?: string;
 }

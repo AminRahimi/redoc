@@ -27,7 +27,7 @@ export class SecurityDefs extends React.PureComponent<SecurityDefsProps> {
               <ShareLink to={scheme.sectionId} />
               {scheme.displayName}
             </H2>
-            <Markdown source={scheme.description || ''} />
+            <Markdown source={scheme.description || ''} className={scheme.descriptionClass} />
             <SecurityDetailsStyle>
               <SecurityRow>
                 <b>Security Scheme Type: </b>

@@ -28,7 +28,7 @@ export interface OperationProps {
 }
 
 export const Operation = observer(({ operation }: OperationProps): JSX.Element => {
-  const { name: summary, description, deprecated, externalDocs, isWebhook, httpVerb } = operation;
+  const { name: summary, description,descriptionClass, deprecated, externalDocs, isWebhook, httpVerb } = operation;
   const hasDescription = !!(description || externalDocs);
   const { showWebhookVerb } = React.useContext(OptionsContext);
   return (
@@ -51,7 +51,7 @@ export const Operation = observer(({ operation }: OperationProps): JSX.Element =
             )}
             {hasDescription && (
               <Description>
-                {description !== undefined && <Markdown source={description} />}
+                {description !== undefined && <Markdown source={description} className={descriptionClass} />}
                 {externalDocs && <ExternalDocumentation externalDocs={externalDocs} />}
               </Description>
             )}

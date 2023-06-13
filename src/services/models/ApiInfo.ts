@@ -8,7 +8,9 @@ export class ApiInfoModel implements OpenAPIInfo {
   version: string;
 
   description: string;
+  descriptionClass?: string;
   summary: string;
+  summaryClass?: string;
   termsOfService?: string;
   contact?: OpenAPIContact;
   license?: OpenAPILicense;
@@ -22,7 +24,9 @@ export class ApiInfoModel implements OpenAPIInfo {
   ) {
     Object.assign(this, parser.spec.info);
     this.description = parser.spec.info.description || '';
+    this.descriptionClass = parser.spec.info.descriptionClass || '';
     this.summary = parser.spec.info.summary || '';
+    this.summaryClass = parser.spec.info.summaryClass || '';
 
     const firstHeadingLinePos = this.description.search(/^\s*##?\s+/m);
     if (firstHeadingLinePos > -1) {

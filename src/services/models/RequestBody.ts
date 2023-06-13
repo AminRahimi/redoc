@@ -14,6 +14,7 @@ type RequestBodyProps = {
 
 export class RequestBodyModel {
   description: string;
+  descriptionClass: string;
   required?: boolean;
   content?: MediaContentModel;
 
@@ -21,6 +22,7 @@ export class RequestBodyModel {
     const isRequest = !isEvent;
     const { resolved: info } = parser.deref(infoOrRef);
     this.description = info.description || '';
+    this.descriptionClass = info.descriptionClass || '';
     this.required = info.required;
 
     const mediaContent = getContentWithLegacyExamples(info);

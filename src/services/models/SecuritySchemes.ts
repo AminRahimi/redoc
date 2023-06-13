@@ -7,6 +7,7 @@ export class SecuritySchemeModel {
   sectionId: string;
   type: OpenAPISecurityScheme['type'];
   description: string;
+  descriptionClass?: string;
   displayName: string;
   apiKey?: {
     name: string;
@@ -30,6 +31,7 @@ export class SecuritySchemeModel {
     this.type = info.type;
     this.displayName = info['x-displayName'] || id;
     this.description = info.description || '';
+    this.descriptionClass = info.descriptionClass || '';
     if (info.type === 'apiKey') {
       this.apiKey = {
         name: info.name!,

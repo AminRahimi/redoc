@@ -1,0 +1,1342 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "وب سرویس های داکتیو",
+        "version": "1.0",
+        "description": "توضیحات وب سرویس های داکتیو",
+        "descriptionClass": "rtl",
+        "contact": {
+            "name": "ویراتک"
+        },
+        "x-logo": {
+            "name": "Docteav",
+            "url": "docteav.jpg"
+        }
+    },
+    "host": "docteav.com",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+            "/oauth/token": {
+            "post": {
+                "summary": "دریافت توکن",
+                "summaryClass": "rtl",
+                "description": "دریافت توکن oauth",
+                "descriptionClass": "rtl",
+                "tags": ["oAuth"],
+                "security" : [
+                    {
+                        "basicAuth" : []
+                    }
+                ],
+                "operationId": "Get OAuthToken",
+                "parameters": [
+                    {
+                        "name": "grant_type",
+                        "in": "query",
+                        "description": "\u0628\u0631\u0627\u06CC \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0645\u06CC \u062A\u0648\u0627\u0646 \u062F\u0648 \u062D\u0627\u0644\u062A \u062F\u0627\u0634\u062A:\r\n\r\n\r\nauthorization_code : \u0628\u0647 \u0627\u06CC\u0646 \u0645\u0639\u0646\u06CC \u0627\u0633\u062A \u06A9\u0647 access token \u0627\u0632 \u0631\u0648\u0627\u0644 authorization code \u0628\u0647 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0627\u0631\u0627\u0626\u0647 \u0645\u06CC \u06AF\u0631\u062F\u062F.\r\n\r\n\r\nrefresh_token : \u062F\u0631 \u0627\u06CC\u0646 \u062D\u0627\u0644\u062A \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 refresh token\u0627\u06CC \u06A9\u0647 \u0647\u0645\u0631\u0627\u0647 \u0628\u0627 access token \u0627\u0632 \u0647\u0645\u06CC\u0646 \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \u062F\u0631\u06CC\u0627\u0641\u062A \u06A9\u0631\u062F\u0647 \u0627\u0633\u062A \u0631\u0627 \u0645\u062C\u062F\u062F\u0627 \u0628\u0647 \u0627\u06CC\u0646 \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \u0627\u0631\u0627\u0626\u0647 \u0645\u06CC\u00AD \u06A9\u0646\u062F \u062A\u0627 access token \u062C\u062F\u06CC\u062F \u062F\u0631\u06CC\u0627\u0641\u062A \u0646\u0645\u0627\u06CC\u062F.",
+                        "descriptionClass":"rtl ff",
+                        "example": "client_credentials",
+                        "required": true,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "\u0647\u0645\u0627\u0646 authorization code \u0627\u06CC \u06A9\u0647 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0627\u0632 \u0633\u0631\u0648\u06CC\u0633 oauth\/authorize \u062F\u0631\u06CC\u0627\u0641\u062A \u06A9\u0631\u062F\u0647 \u0627\u0633\u062A.",
+                      "descriptionClass":"rtl ff",
+                        "example": "1234",
+                        "required": false,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "redirect_uri",
+                        "in": "query",
+                        "description": "\u0628\u0631\u0627\u06CC \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0628\u0627\u06CC\u062F \u0647\u0645\u0627\u0646 redirect_uri \u0627\u0631\u0633\u0627\u0644 \u0634\u062F\u0647 \u062F\u0631 oauth\/authorize \u0631\u0627 \u0645\u062C\u062F\u062F\u0627 \u0627\u0631\u0633\u0627\u0644 \u06A9\u0646\u062F \u0627\u0645\u0627 \u0627\u0632 \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0628\u0631\u0627\u06CC \u0648\u0644\u06CC\u062F\u06CC\u062A \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0645\u06CC \u0634\u0648\u062F \u0648 \u0642\u0631\u0627\u0631 \u0646\u06CC\u0633\u062A \u06A9\u0647 redirect \u0627\u062A\u0641\u0627\u0642 \u0628\u06CC\u0641\u062A\u062F.",
+                      "descriptionClass":"rtl ff",
+                        "example": "localhost",
+                        "required": false,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "refresh_token",
+                        "in": "query",
+                        "description": "\u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0632\u0645\u0627\u0646\u06CC \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0645\u06CC \u0634\u0648\u062F \u06A9\u0647 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0642\u0635\u062F \u062F\u0631\u06CC\u0627\u0641\u062A \u06CC\u06A9 access_token \u062C\u062F\u06CC\u062F \u0628\u0631\u0627\u06CC \u06A9\u0627\u0631\u0628\u0631 \u0631\u0627 \u062F\u0627\u0634\u062A\u0647 \u0628\u0627\u0634\u062F(\u062F\u0631 \u0635\u0648\u0631\u062A \u0645\u0646\u0642\u0636\u06CC \u0634\u062F\u0646 access_token \u0642\u0628\u0644\u06CC).\u062A\u0646\u0647\u0627 \u062F\u0631 \u0635\u0648\u0631\u062A\u06CC \u06A9\u0647 grant_type \u0631\u0627 refresh_token \u0633\u062A \u06A9\u0631\u062F\u0647 \u0628\u0627\u0634\u06CC\u062F \u0628\u0627\u06CC\u062F \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0631\u0627 \u0627\u0631\u0633\u0627\u0644 \u0646\u0645\u0627\u06CC\u06CC\u062F. \u0645\u0642\u062F\u0627\u0631 \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0631\u0627 \u062F\u0631 \u067E\u0627\u0633\u062E \u0647\u0645\u06CC\u0646 \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \u062F\u0631 \u0632\u0645\u0627\u0646\u06CC \u06A9\u0647 grant_type=authorization_code \u0631\u0627 \u0627\u0631\u0633\u0627\u0644 \u06A9\u0631\u062F\u0647 \u0627\u06CC\u062F \u0628\u0647 \u0634\u0645\u0627 \u0627\u0631\u0627\u0626\u0647 \u0634\u062F\u0647 \u0627\u0633\u062A.",
+                      "descriptionClass":"rtl ff",
+                        "example": "5022ffa1-bd7e-4fda-b1e9-4ded7799ad88",
+                        "required": false,
+                        "type" : "string"
+                    }
+                ],
+                "externalDocs": {
+                    "url": ""
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "encoding": "",
+                                "example": {
+                                    "access_token": "5022ffa1-bd7e-4fda-b1e9-4ded7799ad88",
+                                    "token_type": "bearer",
+                                    "expires_in": 3358206,
+                                    "scope": "read"
+                                }
+                            }
+                        },
+                        "x-last-modified": 1624096612499,
+                        "description": "توکن oAuth"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "encoding": "",
+                                "example": {
+                                    "error": "unauthorized",
+                                    "error_description": "Bad credentials"
+                                }
+                            }
+                        },
+                        "x-last-modified": 1624096612499
+                    }
+                },
+
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl http:\/\/{Ganjeh Server Address}\/Ganjeh\/oauth\/token\r\n\t-d code=[AUTORIZATION CODE]\r\n\t-d grant_type=authorization_code\r\n\t-d redirect_uri=[REDIRECT URI]\r\n"
+                                    }
+
+                            ]
+            },
+            "x-last-modified": 1624096612499
+        },
+        "/oauth/authorize": {
+            "get": {
+                "summary": "تایید مجوز دسترسی",
+                "description": "صفحه ورود و تایید مجوز دسترسی",
+                "tags": ["oAuth"],
+                "operationId": "Get OAuthToken",
+                "parameters": [
+                    {
+                        "name": "response_type",
+                        "in": "query",
+                        "description": "\u0628\u0631\u0627\u06CC \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u06A9\u0644\u0627\u06CC\u0646\u062A \u0645\u06CC \u062A\u0648\u0627\u0646\u062F \u0645\u0642\u062F\u0627\u0631 \u0647\u0627\u06CC code \u0648 \u06CC\u0627 token \u0631\u0627 \u0627\u0631\u0633\u0627\u0644 \u0646\u0645\u0627\u06CC\u062F. \u062F\u0631 \u0648\u0627\u0642\u0639 \u0646\u0648\u0639 Grant Type \u0645\u0648\u0631\u062F \u0646\u0638\u0631 \u062F\u0631 \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0645\u0634\u062E\u0635 \u0645\u06CC\u00AD\u0634\u0648\u062F.\r\n\r\n\r\n\u067E\u0627\u0631\u0627\u0645\u062A\u0631 code: \u062F\u0631 \u0627\u06CC\u0646 \u062D\u0627\u0644\u062A\u060C \u0628\u0639\u062F \u0627\u0632 \u062A\u0627\u06CC\u06CC\u062F \u0645\u062C\u0648\u0632 \u062F\u0633\u062A\u0631\u0633\u06CC \u062A\u0648\u0633\u0637 \u06A9\u0627\u0631\u0628\u0631\u060C \u06CC\u06A9 \u06A9\u062F (authorization code) \u0631\u0627 \u062F\u0631 redirect_uri \u0627\u0631\u0633\u0627\u0644 \u062E\u0648\u0627\u0647\u062F \u06A9\u0631\u062F\u060C \u06A9\u0647 \u062F\u0631 \u0627\u062F\u0627\u0645\u0647 \u0628\u0627\u06CC\u062F \u062A\u0648\u0633\u0637 \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \/token \u0628\u0647 access token \u062A\u0628\u062F\u06CC\u0644 \u0634\u0648\u062F. \u0627\u06CC\u0646 \u062D\u0627\u0644\u062A\u060C \u0631\u0648\u0627\u0644 \u067E\u06CC\u0634\u0646\u0647\u0627\u062F\u06CC \u0628\u0631\u0627\u06CC \u0633\u0627\u0645\u0627\u0646\u0647\u00AD \u0647\u0627\u06CC\u06CC \u0627\u0633\u062A \u06A9\u0647 \u0631\u0648\u06CC \u06CC\u06A9 \u0633\u0631\u0648\u0631 \u062F\u0631 \u062D\u0627\u0644 \u0627\u062C\u0631\u0627 \u0645\u06CC \u0628\u0627\u0634\u0646\u062F.\r\n\r\n\r\n\u067E\u0627\u0631\u0627\u0645\u062A\u0631 token: \u062F\u0631 \u0627\u06CC\u0646 \u062D\u0627\u0644\u062A \u06CC\u06A9 access token \u062F\u0631 redirect_uri \u0628\u0647 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0627\u0631\u0633\u0627\u0644 \u0645\u06CC \u0634\u0648\u062F \u06A9\u0647 \u062F\u06CC\u06AF\u0631 \u0646\u06CC\u0627\u0632\u06CC \u0628\u0647 \u0641\u0631\u0627\u062E\u0648\u0627\u0646\u06CC \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \u0647\u0627\u06CC \u062F\u06CC\u06AF\u0631 \u0646\u0628\u0627\u0634\u062F(impilicit grant).  \u0627\u06CC\u0646 \u062D\u0627\u0644\u062A \u0628\u0631\u0627\u06CC \u0627\u067E\u0644\u06CC\u06A9\u06CC\u0634\u0646 \u0647\u0627\u06CC client-side \u0645\u0627\u0646\u0646\u062F mobile app \u0647\u0627 \u0648 \u06CC\u0627 javascript_based apps \u067E\u06CC\u0634\u0646\u0647\u0627\u062F \u0645\u06CC \u06AF\u0631\u062F\u062F.",
+                        "example": "token, code",
+                        "required": true,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "\u0647\u0645\u0627\u0646 \u0634\u0646\u0627\u0633\u0647 Client \u0645\u06CC \u0628\u0627\u0634\u062F \u06A9\u0647 \u062F\u0631 \u0632\u0645\u0627\u0646 \u062B\u0628\u062A \u06A9\u0631\u062F\u0646 Client \u062F\u0631 \u0633\u0627\u0645\u0627\u0646\u0647 \u06AF\u0646\u062C\u0647\u060C \u0628\u0631\u0627\u06CC Client \u0645\u0631\u0628\u0648\u0637\u0647 \u0645\u0634\u062E\u0635 \u0645\u06CC \u0634\u0648\u062F. \u0628\u0631\u0627\u06CC \u0627\u0631\u062A\u0628\u0627\u0637 Client \u0628\u0647 \u0627\u06CC\u0646 \u062F\u0627\u062F\u0647 \u0646\u06CC\u0627\u0632 \u062F\u0627\u0631\u062F \u0648 \u0628\u0627\u06CC\u062F \u0622\u0646 \u0631\u0627 \u0627\u0632 \u0633\u0627\u0645\u0627\u0646\u0647 \u06AF\u0646\u062C\u0647 \u062F\u0631\u06CC\u0627\u0641\u062A \u06A9\u0646\u062F.",
+                        "example": "test",
+                        "required": true,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "redirect_uri",
+                        "in": "query",
+                        "description": "\u0622\u062F\u0631\u0633\u06CC \u0627\u0633\u062A \u06A9\u0647 \u0628\u0639\u062F \u0627\u0632 \u0639\u0645\u0644 \u0627\u062D\u0631\u0627\u0632 \u0647\u0648\u06CC\u062A \u0645\u0648\u0641\u0642 \u06CC\u0627 \u0646\u0627 \u0645\u0648\u0641\u0642 \u062A\u0648\u0633\u0637 Auth Server\u060C \u06A9\u0627\u0631\u0628\u0631 \u0628\u0647 \u0622\u0646 \u0645\u0646\u062A\u0642\u0644 \u0645\u06CC \u0634\u0648\u062F. \u0627\u06CC\u0646 \u0628\u0627\u06CC\u062F \u062F\u0642\u06CC\u0642\u0627 \u0647\u0645\u0627\u0646 \u0622\u062F\u0631\u0633\u06CC \u0628\u0627\u0634\u062F \u06A9\u0647 \u062F\u0631 \u0632\u0645\u0627\u0646 \u062B\u0628\u062A \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0628\u0647 \u0639\u0646\u0648\u0627\u0646 Client \u062F\u0631 \u0633\u0627\u0645\u0627\u0646\u0647 \u06AF\u0646\u062C\u0647 \u0630\u062E\u06CC\u0631\u0647 \u0634\u062F\u0647 \u0627\u0633\u062A.",
+                        "example": "localhost",
+                        "required": true,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "scope",
+                        "in": "query",
+                        "description": "\u062F\u0633\u062A\u0631\u0633\u06CC \u0647\u0627\u06CC\u06CC \u06A9\u0647 \u06A9\u0644\u0627\u06CC\u0646\u062A(\u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627) \u0628\u0647 \u0622\u0646\u00AD\u0647\u0627 \u0631\u0648\u06CC Resource Server \u0646\u06CC\u0627\u0632 \u062F\u0627\u0631\u062F. \u062F\u0631 \u0635\u0648\u0631\u062A\u06CC \u06A9\u0647 \u0686\u0646\u062F \u0645\u0648\u0631\u062F \u0628\u0627\u0634\u062F \u0628\u0627\u06CC\u062F \u0628\u0627 , \u062C\u062F\u0627 \u0634\u0648\u0646\u062F \u0648 \u062F\u0631 \u0635\u0648\u0631\u062A\u06CC \u06A9\u0647 \u0647\u06CC\u0686 \u0645\u0648\u0631\u062F\u06CC \u0627\u0631\u0633\u0627\u0644 \u0646\u0634\u0648\u062F\u060C Auth Server \u0647\u0645\u0647 Scope \u0647\u0627 \u0631\u0627 \u062F\u0631 \u0646\u0638\u0631 \u062E\u0648\u0627\u0647\u062F \u06AF\u0631\u0641\u062A.\r\n\r\n\u0647\u0645 \u0627\u06A9\u0646\u0648\u0646 scope \u0647\u0627 \u062F\u0648 \u0645\u0648\u0631\u062F read \u0648 write \u0631\u0627 \u0634\u0627\u0645\u0644 \u0645\u06CC \u0634\u0648\u0646\u062F.",
+                        "example": "read",
+                        "required": true,
+                        "type" : "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "\u06CC\u06A9 \u0631\u0634\u062A\u0647 \u062F\u0644\u062E\u0648\u0627\u0647 \u06A9\u0647 \u062A\u0648\u0633\u0637 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0627\u06CC\u062C\u0627\u062F \u0634\u062F\u0647 \u0627\u0633\u062A \u0648 \u062F\u0631 redirect_uri \u0646\u06CC\u0632 \u0628\u0647 \u0634\u0645\u0627 \u0627\u0631\u0627\u0626\u0647 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. \u062F\u0644\u06CC\u0644 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631\u060C \u0645\u062D\u0627\u0641\u0638\u062A \u062F\u0631 \u0628\u0631\u0627\u0628\u0631 \u062D\u0645\u0644\u0647 cross-site request forgery \u0645\u06CC \u0628\u0627\u0634\u062F.\r\n\r\n",
+                        "example": "123",
+                        "required": true,
+                        "type" : "string"
+                    }
+                ],
+                "externalDocs": {
+                    "url": ""
+                },
+                "responses": {
+                    "302": {
+                        "x-last-modified": 1624096612499,
+                        "description": "\u200B\t\u0628\u0647 \u0627\u06CC\u0646 \u062F\u0644\u06CC\u0644 \u06A9\u0647 \u0627\u06CC\u0646 \u0622\u062F\u0631\u0633 \u062F\u0631 \u0648\u0627\u0642\u0639 \u06CC\u06A9 web page \u0645\u06CC \u0628\u0627\u0634\u062F\u060C \u0647\u06CC\u0686 \u067E\u0627\u0633\u062E \u0645\u0633\u062A\u0642\u06CC\u0645\u06CC \u0646\u062E\u0648\u0627\u0647\u062F \u062F\u0627\u0634\u062A \u0648 \u0628\u0639\u062F \u0627\u0632 \u062A\u0627\u06CC\u06CC\u062F \u0645\u062C\u0648\u0632 \u062F\u0633\u062A\u0631\u0633\u06CC \u062A\u0648\u0633\u0637 \u06A9\u0627\u0631\u0628\u0631\u060C \u0646\u0633\u0628\u062A \u0628\u0647 response type \u0627\u0631\u0627\u0626\u0647 \u0634\u062F\u0647\u060C \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0647\u0627\u06CC\u06CC \u0628\u0647 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0627\u0631\u0627\u0626\u0647 \u062E\u0648\u0627\u0647\u062F \u0634\u062F.\r\n\r\n\r\n\u067E\u0627\u0633\u062E \u062F\u0631 \u062D\u0627\u0644\u062A response_type=code : \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0647\u0627\u06CC \u067E\u0627\u0633\u062E \u062F\u0631 \u0642\u0627\u0644\u0628 query param \u0627\u0631\u0627\u0626\u0647 \u0645\u06CC\u00AD\u0634\u0648\u062F:\r\n\r\n\u0646\u0645\u0648\u0646\u0647 \u067E\u0627\u0633\u062E :\r\n[redirect_uri]?code=ABCDEFG&state=[STATE]\r\n\r\ncode : \u0647\u0645\u0627\u0646 \u062A\u0648\u06A9\u0646 Authorization code \u0645\u06CC \u0628\u0627\u0634\u062F \u06A9\u0647 \u0628\u0627 \u0627\u0631\u0633\u0627\u0644 \u0622\u0646 \u0628\u0647 \/oauth\/token \u0645\u06CC \u062A\u0648\u0627\u0646\u06CC\u062F access token \u0646\u0647\u0627\u06CC\u06CC \u0631\u0627 \u062F\u0631\u06CC\u0627\u0641\u062A \u0646\u0645\u0627\u06CC\u06CC\u062F.\r\nstate: \u0647\u0645\u0627\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 state \u06A9\u0647 \u062F\u0631 \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0627\u0648\u0644\u06CC\u0647 \u0627\u0631\u0633\u0627\u0644 \u06A9\u0631\u062F\u06CC\u062F.\r\n\r\n\r\n\r\n\u067E\u0627\u0633\u062E \u062F\u0631 \u062D\u0627\u0644\u062A response_type=token: \u067E\u0627\u0631\u0627\u0645\u062A\u0631\u0647\u0627\u06CC \u067E\u0627\u0633\u062E \u062F\u0631  \u0627\u062F\u0627\u0645\u0647 redirect_url \u0648 \u0628\u0639\u062F \u0627\u0632 # \u0627\u0631\u0627\u0626\u0647 \u0645\u06CC\u00AD\u06AF\u0631\u062F\u062F.\r\n\r\n\u0646\u0645\u0648\u0646\u0647 \u067E\u0627\u0633\u062E:\r\n[redirect_uri]#access_token=ABCDEFG&token_type=bearer&expiers_in=[time_stamp]&scope=read&state=[STATE]\r\n\r\n\u0646\u06A9\u062A\u0647: \u0627\u0632 \u0622\u0646\u062C\u0627\u06CC\u06CC \u06A9\u0647 \u0627\u0637\u0644\u0627\u0639\u0627\u062A \u0628\u0639\u062F \u0627\u0632 # \u060C \u062A\u0648\u0633\u0637 \u06A9\u0627\u0631\u0628\u0631 \u0642\u0627\u0628\u0644 \u0648\u06CC\u0631\u0627\u06CC\u0634 \u0645\u06CC \u0628\u0627\u0634\u062F\u060C \u0646\u0628\u0627\u06CC\u062F \u062F\u0631 \u0644\u0627\u06CC\u0647 server-side \u0628\u0647 \u0635\u062D\u062A \u0622\u0646 \u0627\u0637\u0645\u06CC\u0646\u0627\u0646 \u062F\u0627\u0634\u062A. \u062F\u0631 \u0635\u0648\u0631\u062A\u06CC \u06A9\u0647 \u0646\u06CC\u0627\u0632 \u0628\u0647 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u0647\u0631 \u06CC\u06A9 \u0627\u0632 \u0627\u06CC\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 \u0647\u0627 \u062F\u0631 \u0644\u0627\u06CC\u0647 server-side \u0648\u062C\u0648\u062F \u062F\u0627\u0634\u062A \u0628\u0627\u06CC\u062F \u0627\u0632 \u0631\u0648\u0627\u0644 response_type=code \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0634\u0648\u062F.\r\naccess_token: \u0647\u0645\u0627\u0646 \u062A\u0648\u06A9\u0646 \u0646\u0647\u0627\u06CC\u06CC \u06A9\u0647 \u0628\u0627\u06CC\u062F \u062F\u0631 \u0641\u0631\u0627\u062E\u0648\u0627\u0646\u06CC \u0648\u0628 \u0633\u0631\u0648\u06CC\u0633 \u0647\u0627\u06CC \u06AF\u0646\u062C\u0647 \u062A\u0648\u0633\u0637 \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627\u060C \u0627\u0631\u0627\u0626\u0647 \u06AF\u0631\u062F\u062F.\r\ntoken_type: \u0646\u0648\u0639 \u062A\u0648\u06A9\u0646 \u06A9\u0647 \u0647\u0645\u06CC\u0634\u0647 bearer \u062E\u0648\u0627\u0647\u062F \u0628\u0648\u062F.\r\nscope: \u0644\u06CC\u0633\u062A \u062F\u0633\u062A\u0631\u0633\u06CC \u0647\u0627\u06CC\u06CC \u06A9\u0647 \u0645\u062C\u0648\u0632 \u0622\u0646 \u062A\u0648\u0633\u0637 \u06A9\u0627\u0631\u0628\u0631 \u0628\u0631\u0627\u06CC \u0633\u0627\u0645\u0627\u0646\u0647 \u0634\u0645\u0627 \u0635\u0627\u062F\u0631 \u0634\u062F\u0647 \u0627\u0633\u062A.\r\nexpiers_in: \u062A\u0627\u0631\u06CC\u062E \u0627\u0646\u0642\u0636\u0627\u06CC access_token\r\nstate: \u0647\u0645\u0627\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 state \u06A9\u0647 \u062F\u0631 \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0627\u0648\u0644\u06CC\u0647 \u0627\u0631\u0633\u0627\u0644 \u06A9\u0631\u062F\u06CC\u062F.\r\n\r\n\r\n\r\n\u062F\u0631 \u062D\u0627\u0644\u062A\u06CC \u06A9\u0647 \u06A9\u0627\u0631\u0628\u0631 \u0645\u062C\u0648\u0632 \u062F\u0633\u062A\u0631\u0633\u06CC \u0631\u0627 \u062A\u0627\u06CC\u06CC\u062F \u0646\u06A9\u0646\u062F \u0648 \u06CC\u0627 \u062F\u0631 \u0631\u0648\u0627\u0644 \u062A\u0627\u06CC\u06CC\u062F \u0645\u062C\u0648\u0632 \u062F\u0633\u062A\u0631\u0633\u06CC \u062E\u0637\u0627\u06CC\u06CC \u0631\u062E \u062F\u0647\u062F \u067E\u0627\u0631\u0627\u0645\u062A\u0631\u0647\u0627\u06CC \u067E\u0627\u0633\u062E \u0647\u0645\u0686\u0646\u0627\u0646 \u0628\u0647 \u0634\u06A9\u0644 query param \u062F\u0631 resiredt_uri \u0627\u0631\u0627\u0626\u0647 \u062E\u0648\u0627\u0647\u062F \u0634\u062F.\r\n\r\nerror: \u06CC\u06A9 error code \u0627\u0633\u062A\u0627\u0646\u062F\u0627\u0631\u062F oauth 2 \u06A9\u0647 \u0644\u06CC\u0633\u062A \u0622\u0646 \u0627\u0632 \u0627\u06CC\u0646 \u0644\u06CC\u0646\u06A9 \u0642\u0627\u0628\u0644 \u0631\u0648\u06CC\u062A \u0627\u0633\u062A.\r\nerror_description: \u0634\u0631\u062D \u062E\u0637\u0627\u06CC \u0631\u062E \u062F\u0627\u062F\u0647 \u0628\u0647 \u0635\u0648\u0631\u062A user friendly\r\nstate: \u0647\u0645\u0627\u0646 \u067E\u0627\u0631\u0627\u0645\u062A\u0631 state \u06A9\u0647 \u062F\u0631 \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0627\u0648\u0644\u06CC\u0647 \u0627\u0631\u0633\u0627\u0644 \u06A9\u0631\u062F\u06CC\u062F.",
+                        "descriptionClass": "rtl"
+                    }
+                },
+
+                "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --request POST \\\n  -u username:password http://{docteav_url}/Ganjeh/oauth/authorize?response_type=code&client_id= jimbo&redirect_uri=http://localhost:8080/Ganjeh/api/config_oauth_ganjeh&scope=read&state=1234zyx "
+                                    }
+
+                            ]
+            },
+            "x-last-modified": 1624096612499
+        },
+         "/api/external/cnode/list-search/": {
+            "get": {
+                "summary": "جستجو",
+                "description": "وب سرویس جستجوی بر روی اسناد و پوشه ها",
+                "tags": ["Search"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [{
+									"uid": "2876d2b1-ee50-4927-a68d-8ed44c7d1e1c",
+									"title": "document.pdf",
+									"childCount": "2",
+									"hasAccess": true,
+									"extension": "pdf",
+									"path": "/کاربران/sysadmin/document.pdf",
+									"memberType": "document",
+									"size": 109401,
+									"thumbnails": null,
+									"creator": {
+										"uid": "bbfb2b97-9a85-4da6-a011-1343864fd583",
+										"username": "sysadmin",
+										"firstName": "پشتیبان",
+										"lastName": "سیستم",
+										"email": "sysadmin@docteav.com",
+										"displayName": " ",
+										"phone": null,
+										"avatar": {
+											"id": 3041,
+											"name": "admin-avatar.png",
+											"hash": "4TBEMDZVB8WFJSM8KYYYK744KWMQNR4NQVQ1V09W",
+											"size": 46655
+										}
+									}
+								}]
+
+                            }
+                        },
+                        "description": "سند یا پوشه",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/list-search/?query={query}' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "کاربران",
+                    "name": "query",
+                    "description": "ایتم جستجو",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "parentNodeUid",
+                    "description": "شناسه نود پدر",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "example": "7013af5f-8641-407f-a9c3-dc552b76e81b",
+                    "name": "labelUid",
+                    "description": "شناسه دسته بندی",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "example": "false",
+                    "name": "folderOnly",
+                    "description": "فقط پوشه",
+                    "in": "query",
+                    "required": false,
+                    "type": "boolean"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+         "/api/external/cnode/tree_search/": {
+            "get": {
+                "summary": "جستجوی درختی",
+                "description": "وب سرویس جستجوی درختی بر روی اسناد و پوشه ها",
+                "tags": ["Search"],
+                "responses": {
+                    "200": {
+                        "content": {
+							"application/json": {
+								"example": {
+									"totalSize": 1,
+									"items": [{
+										"uid": "ganjeh-root-tree-node",
+										"title": null,
+										"childCount": 3,
+										"hasAccess": true,
+										"extension": null,
+										"memberType": "folder",
+										"size": 0,
+										"thumbnails": null,
+										"creator": null,
+										"children": [{
+											"uid": "3bf5b8c0-83d4-429c-9fb9-1f7de6ef798c",
+											"title": "کاربران",
+											"childCount": 44,
+											"hasAccess": true,
+											"extension": null,
+											"memberType": "folder",
+											"size": 0,
+											"thumbnails": null,
+											"creator": null,
+											"children": [{
+												"uid": "39058d85-847f-4f6b-973f-1a86de6c674d",
+												"title": "sysadmin",
+												"childCount": 68,
+												"hasAccess": true,
+												"extension": null,
+												"memberType": "folder",
+												"size": 0,
+												"thumbnails": null,
+												"creator": {
+													"uid": "bbfb2b97-9a85-4da6-a011-1343864fd583",
+													"username": "sysadmin",
+													"firstName": "پشتیبان",
+													"lastName": "سیستم",
+													"email": "sysadmin@docteav.com",
+													"displayName": " ",
+													"phone": null,
+													"avatar": {
+														"id": 3041,
+														"name": "admin-avatar.png",
+														"hash": "4TBEMDZVB8WFJSM8KYYYK744KWMQNR4NQVQ1V09W",
+														"size": 46655
+													}
+												},
+												"children": [{
+													"uid": "8f9d84e8-a357-4417-ac9e-ce513549e2d0",
+													"title": "پوشه اطلاعات",
+													"childCount": 4,
+													"hasAccess": true,
+													"extension": null,
+													"memberType": "folder",
+													"size": 0,
+													"thumbnails": null,
+													"creator": {
+														"uid": "bbfb2b97-9a85-4da6-a011-1343864fd583",
+														"username": "sysadmin",
+														"firstName": "پشتیبان",
+														"lastName": "سیستم",
+														"email": "sysadmin@docteav.com",
+														"displayName": " ",
+														"phone": null,
+														"avatar": {
+															"id": 3041,
+															"name": "admin-avatar.png",
+															"hash": "4TBEMDZVB8WFJSM8KYYYK744KWMQNR4NQVQ1V09W",
+															"size": 46655
+														}
+													},
+													"children": [{
+														"uid": "2876d2b1-ee50-4927-a68d-8ed44c7d1e1c",
+														"title": "document.pdf",
+														"childCount": 0,
+														"hasAccess": true,
+														"extension": "pdf",
+														"memberType": "document",
+														"size": 109401,
+														"thumbnails": null,
+														"creator": {
+															"uid": "bbfb2b97-9a85-4da6-a011-1343864fd583",
+															"username": "sysadmin",
+															"firstName": "پشتیبان",
+															"lastName": "سیستم",
+															"email": "sysadmin@docteav.com",
+															"displayName": " ",
+															"phone": null,
+															"avatar": {
+																"id": 3041,
+																"name": "admin-avatar.png",
+																"hash": "4TBEMDZVB8WFJSM8KYYYK744KWMQNR4NQVQ1V09W",
+																"size": 46655
+															}
+														},
+														"children": []
+													}]
+												}]
+											}]
+										}]
+									}]
+								}
+							}
+						},
+                        "description": "درخت اسناد و پوشه ها",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/tree_search/?query={query}' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "کاربران",
+                    "name": "query",
+                    "description": "ایتم جستجو",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "parentNodeUid",
+                    "description": "شناسه نود پدر",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "example": "7013af5f-8641-407f-a9c3-dc552b76e81b",
+                    "name": "labelUid",
+                    "description": "شناسه دسته بندی",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "example": "false",
+                    "name": "folderOnly",
+                    "description": "فقط پوشه",
+                    "in": "query",
+                    "required": false,
+                    "type": "boolean"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/download/": {
+            "get": {
+                "summary": "دریافت فایل سند",
+                "description": "وب سرویس دریافت فاید سند",
+                "tags": ["Document"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/pdf": {
+                                "example": ""
+                            }
+                        },
+                        "description": "فایل سند",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/download/?nodeUid=' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "nodeUid",
+                    "description": "شناسه سند",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/{parentTreeNodeUid}/file/": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "آپلود فایل",
+                "description": "وب سرویس آپلود فایل",
+                "tags": ["Document"],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "data",
+                                    "file"
+                                  ],
+                               "properties": {
+                                  "data": {
+                                    "$ref": "#/UploadFile"
+                                  },
+                                  "file": {
+                                     "type": "string",
+                                     "format": "binary"
+                                  }
+                               }
+                            }
+                         }
+                    }
+                 },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "versionCount" : {
+                                      "type" : "infinite",
+                                      "allowedCount" : -1
+                                    },
+                                    "_displayString" : "document",
+                                    "@topicable" : [ "0b3bd7c6-ba48-4042-8f2a-e9314e6e7237" ],
+                                    "extension" : "json",
+                                    "@memo" : {
+                                      "hasNewNotification" : false
+                                    },
+                                    "@cnodeLinkable" : [ ],
+                                    "mimeType" : "application/pdf",
+                                    "source" : "uploaded",
+                                    "_isDeleted" : false,
+                                    "path" : "/کاربران/admin/document.pdf",
+                                    "file" : "5F00ZGUG328NEOFGRAD2BODID8Z39HV1C95WFAAQ",
+                                    "publicationState" : "draft",
+                                    "@cnodeVersionable" : {
+                                      "currentVersion" : 1,
+                                      "versionCount" : 1
+                                    },
+                                    "@taggable" : [ ],
+                                    "treeNodeUid" : "67a78ea0-1418-4886-9c72-f2c82af1bafe",
+                                    "lastUserEditor" : {
+                                      "username" : "admin",
+                                      "fullname" : "ادمین سیستمی"
+                                    },
+                                    "_creationdDate" : 1633894209445,
+                                    "@cnode_text_extractable" : {
+                                      "state" : 0
+                                    },
+                                    "lastEditDate" : 1633894209439,
+                                    "@commentable" : "780e13e2-0909-4e38-97bf-e5a8f8486194",
+                                    "sha1" : "30D1ED82EE9DC128FDB869C5B2686CBCD691B20C",
+                                    "_creator" : "admin",
+                                    "size" : 49560,
+                                    "name" : "document.pdf",
+                                    "memberType" : "document",
+                                    "_uid" : "2c213d73-d7e8-409f-9f33-458ebd723eb9",
+                                    "status" : "active"
+                                  }
+                            }
+                        },
+                        "description": "اطلاعات سند",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request POST 'docteav.com\/Ganjeh\/api\/search\/view' \\\r\n--header 'Cookie: JSESSIONID=F38979E1AFEE818E8501EA2B2CB2643C' \\\r\n--form 'file=@\"\/home\/user\/Work\/logs\/letter.pdf\"' \\\r\n--form 'data=\"{\\\"name\\\":\\\"document_name\\\"}\"'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "parentTreeNodeUid",
+                    "description": "(در صورتی که folder_path ارسال شود، تمامی فولدرهای مشخص شده در آن ذیل این پوشه قرار می‌گیرند.)شناسه پوشه پدر",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/view/": {
+            "get": {
+                "summary": "مشاهده فایل سند",
+                "description": "وب سرویس مشاهده فاید سند",
+                "tags": ["Document"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/pdf": {
+                                "example": ""
+                            }
+                        },
+                        "description": "فایل سند",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/view/?nodeUid=' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "nodeUid",
+                    "description": "شناسه سند",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/share_link/": {
+            "post": {
+                "summary": "دریافت لینک اشتراک‌گذاری",
+                "description": "وب‌سرویس دریافت لینک اشتراک‌گذاری سند",
+                "produces": ["application\/json"],
+                "tags": ["Document"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "url" : "http://docteav.ir/Ganjeh/public.html?cnodeUid=2a3ef9f8-cffd-4df4-b160-b68d52c91bf6&authToken=wbAPYxaSOAUxaiIle2ZXFRD0MvnU9tND"
+                                }
+                            }
+                        },
+                        "description": "فایل سند",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/share_link?nodeUid={node_uid}' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "nodeUid",
+                    "description": "شناسه سند",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/share_link/directory": {
+            "post": {
+                "summary": "دریافت لینک اشتراک‌گذاری پوشه",
+                "description": "وب‌سرویس دریافت لینک اشتراک‌گذاری پوشه",
+                "produces": ["application\/json"],
+                "tags": ["Node Service"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "description": "اطلاعات پوشه جهت ساخت لینک اشتراک‌گذاری(فقط یکی از موارد شناسه یا مسیر پوشه باید ارسال گردند.)",
+                                "$ref": "#/DirectoryShareLink"
+                            }
+                         }
+                    }
+                 },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "url" : "https://docteav.ir/Ganjeh/public.html?cnodeUid=e0661828-8fa7-41f5-8d99-0802649cbbcc&authToken=bCCIx7brYejj1Ess0mq5UYGGPSt8_cbD"
+                                }
+                            }
+                        },
+                        "description": "آدرس لینک اشتراک‌گذاری پوشه",
+                        "x-last-modified": 1624096612499
+                    }
+                }
+            },
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/cnode/tree_children/": {
+            "get": {
+                "summary": "دریافت پوشه",
+                "description": "وب سرویس دریافت درخت یک پوشه",
+                "tags": ["Node Service"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                        {
+                                            "uid": "cb6a4d8a-cbe0-462a-91b1-52af875546f7",
+                                            "title": "کاربران",
+                                            "childCount": "7",
+                                            "hasAccess": true,
+                                            "extension": null,
+                                            "path": "/کاربران"
+                                        },
+                                        {
+                                            "uid": "8b9495de-858a-4ab2-b4d7-41aff1158daf",
+                                            "title": "سازمان ها",
+                                            "childCount": "2",
+                                            "hasAccess": true,
+                                            "extension": null,
+                                            "path": "/سازمان\u200cها"
+                                        }
+                                    ]
+
+                            }
+                        },
+                        "description": "درخت اسناد و پوشه ها",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/list-search/?uid={uid}' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+               {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "uid",
+                    "description": "شناسه نود پدر",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "example": "NAME",
+                    "name": "sort",
+                    "description": "فیلد مرتب‌سازی",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "example": "DESC",
+                    "name": "sortDir",
+                    "description": "جهت مرتب‌سازی",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                },{
+                    "example": false,
+                    "name": "folderOnly",
+                    "description": "فقط پوشه",
+                    "in": "query",
+                    "required": false,
+                    "type": "boolean"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+
+        "/api/external/cnode/{parentTreeNodeUid}/hyperlink": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "ساخت هایپرلینک",
+                "description": "وب سرویس ساخت هایپرلینک",
+                "tags": ["Node Service"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/Hyperlink"
+                            }
+                         }
+                    }
+                 },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "uid": "1487bc48-2942-4934-a63f-5cbe3385f88e",
+                                    "name": "نامه صورت وضعیت",
+                                    "size": 17,
+                                    "path": "/سازمان‌ها/مدارک فنی/فولدر ۱/فولدر ۲/نامه صورت وضعیت",
+                                    "backrefUid": "537c9ef8-c4bd-4614-9a6f-108e41d8c180",
+                                    "backrefType": "hyperLink",
+                                    "childcount": 0,
+                                    "parent": {
+                                        "uid": "950761ba-0a3f-4168-af65-93bba6b1c3b0",
+                                        "title": "فولدر ۲"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "مشخصات لینک ساخته شده",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request POST 'https://{docteav_url}/Ganjeh/api/external/cnode/parentTreeNodeUid/hyperlink'\\\n--header 'Authorization: Bearer {generated access_token}' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"name\" : \"لینک\",\n    \"link\" : \"http://google.com\",\n    \"folder_path\" : [\n        {\n            \"name\" : \"فولدر ۱\"\n        },\n        {\n            \"name\" : \"فولدر ۲\"\n        }\n    ],\n    \"labelUIDs\" : [\n        \"537c9ef8-c4bd-4614-9a6f-108e41d8c180\"\n    ],\n    \"tags\" : [\n        {\n            \"text\" : \"تست\"\n        }\n    ]\n}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "parentTreeNodeUid",
+                    "description": "(در صورتی که folder_path ارسال شود، تمامی فولدرهای مشخص شده در آن ذیل این پوشه قرار می‌گیرند.)شناسه پوشه پدر",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+
+        "/api/external/cnode/{parentTreeNodeUid}/directory": {
+            "produces": [
+                "application/json"
+            ],
+            "post": {
+                "summary": "ساخت پوشه",
+                "description": "وب سرویس ساخت پوشه جدید",
+                "tags": ["Node Service"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/NewDirectory"
+                            }
+                         }
+                    }
+                 },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "uid": "1487bc48-2942-4934-a63f-5cbe3385f88e",
+                                    "name": "صورت وضعیت",
+                                    "path": "/سازمان‌ها/مدارک فنی/فولدر ۱/فولدر ۲/صورت وضعیت",
+                                    "backrefUid": "537c9ef8-c4bd-4614-9a6f-108e41d8c199",
+                                    "backrefType": "folder",
+                                    "childcount": 0,
+                                    "parent": {
+                                        "uid": "950761ba-0a3f-4168-af65-93bba6b1c3b0",
+                                        "title": "فولدر ۲"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "مشخصات پوشه ساخته شده",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request POST 'https://{docteav_url}/Ganjeh/api/external/cnode/{parentTreeNodeUid}/directory'\\\n--header 'Authorization: Bearer {generated access_token}' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"name\" : \"صورت وضعیت\",\n    \"folder_path\" : [\n        {\n            \"name\" : \"فولدر ۱\"\n        },\n        {\n            \"name\" : \"فولدر ۲\"\n        }\n    ],\n    \"labelUIDs\" : [\n        \"537c9ef8-c4bd-4614-9a6f-108e41d8c180\"\n    ],\n    \"tags\" : [\n        {\n            \"text\" : \"تست\"\n        }\n    ]\n}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "parentTreeNodeUid",
+                    "description": "(در صورتی که folder_path ارسال شود، تمامی فولدرهای مشخص شده در آن ذیل این پوشه قرار می‌گیرند.)شناسه پوشه پدر",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+
+        "/api/external/cnode/label/items": {
+            "get": {
+                "summary": "لیست برچسب‌های دسته بندی",
+                "description": "وب سرویس دریافت لیست برچسب‌های دسته بندی",
+                "tags": ["Label"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "uid": "71d0a87a-1357-4d22-8507-b56acd3ccec4",
+                                        "name": "تست",
+                                        "available": true,
+                                        "color": null,
+                                        "organization": "37cafbca-d1ab-4877-90d0-6f85a2f6dc50"
+                                    }
+                                ]
+
+                            }
+                        },
+                        "description": "لیست برچسب‌های دسته بندی",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/cnode/label/items?query={query}' \\\n
+                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ]
+            },
+            "parameters": [
+               {
+                    "example": "تست",
+                    "name": "query",
+                    "description": "جستجو در برچسب‌ها",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/document_type/": {
+            "get": {
+                "summary": "لیست فراداده ها(نوع سند)",
+                "description": "وب سرویس دریافت لیست فراداده ها(نوع سند)",
+                "tags": ["Document Type"],
+                "responses": {
+                    "200": {
+                        "content": {
+							"application/json": {
+								"example": {
+									"items": [{
+											"entityType": {
+												"extuid": "defaultDocType",
+												"snapshotsCount": 1,
+												"name": "پیشفرض",
+												"key": "defaultDocType"
+											},
+											"enabled": true,
+											"versionCount": 5
+										},
+										{
+											"entityType": {
+												"extuid": "searchable",
+												"snapshotsCount": 1,
+												"name": "برای جست\u200cوجو",
+												"key": "searchable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										},
+										{
+											"entityType": {
+												"extuid": "editable",
+												"snapshotsCount": 1,
+												"name": "برای ویرایش",
+												"key": "editable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										},
+										{
+											"entityType": {
+												"extuid": "formDesignable",
+												"snapshotsCount": 1,
+												"name": "برای طراحی فرم",
+												"key": "formDesignable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										}
+									],
+									"totalCount": 4,
+									"fields": null
+								}
+							}
+						},
+                        "description": "درخت اسناد و پوشه ها",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/document_type/' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+                            ],
+            },
+            "parameters": [
+            ],
+            "x-last-modified": 1624096612499
+        },
+        "/api/external/document_type/{entityTypeKey}": {
+            "get": {
+                "summary": "جزئیات ساختار یک فراداده (نوع سند)",
+                "description": "وب سرویس دریافت جزئیات ساختار یک فراداده (نوع سند)",
+                "tags": ["Document Type"],
+                "responses": {
+                    "200": {
+                        "content": {
+							"application/json": {
+								"example": {
+									"items": [{
+											"entityType": {
+												"extuid": "defaultDocType",
+												"snapshotsCount": 1,
+												"name": "پیشفرض",
+												"key": "defaultDocType"
+											},
+											"enabled": true,
+											"versionCount": 5
+										},
+										{
+											"entityType": {
+												"extuid": "searchable",
+												"snapshotsCount": 1,
+												"name": "برای جست\u200cوجو",
+												"key": "searchable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										},
+										{
+											"entityType": {
+												"extuid": "editable",
+												"snapshotsCount": 1,
+												"name": "برای ویرایش",
+												"key": "editable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										},
+										{
+											"entityType": {
+												"extuid": "formDesignable",
+												"snapshotsCount": 1,
+												"name": "برای طراحی فرم",
+												"key": "formDesignable"
+											},
+											"enabled": true,
+											"versionCount": 2
+										}
+									],
+									"totalCount": 4,
+									"fields": null
+								}
+							}
+						},
+                        "description": "درخت اسناد و پوشه ها",
+                        "x-last-modified": 1624096612499
+                    }
+                },
+                 "x-code-samples": [
+                                    {
+                                        "lang": "Shell_curl",
+                                        "source": "curl --location --request GET 'https://{docteav_url}/Ganjeh/api/external/document_type/{entityTypeKey}/' \\\n
+                                                        --header 'Authorization: Bearer {generated access_token}'"
+                                    }
+
+                            ],
+            },
+            "parameters": [
+                {
+                    "example": "8f9d84e8-a357-4417-ac9e-ce513549e2zd0",
+                    "name": "entityTypeKey",
+                    "description": "شناسه نوع سند (فراداده)",
+                    "in": "path ",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "x-last-modified": 1624096612499
+        }
+    },
+    "NewDirectory": {
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "نام پوشه",
+            "example": "صورت وضعیت"
+          },
+          "folder_path" : {
+            "type" : "array",
+            "description" : "مسیر قرار گیری پوشه (در صورتی که این فیلد ارسال شود، پوشه جدید در سلسله پوشه‌های ارسال شده، ذیل پوشه پدر که در آدرس وب‌سرویس ارسال شده (ترتیب ارسال مهم است، زیرا این ساختار به صورت درختی ساخته می‌شود) در این فیلد ساخته می‌شود، درصورتی که هر سطح یک از این ساختار وجود نداشته باشد، پوشه‌ای با آن نام ساخته می‌شود.)",
+            "items" : {
+                "$ref": "#/FolderPath"
+            },
+            "example" : [
+                {
+                    "name" : "مدارک فنی"
+                },
+                {
+                    "name" : "فولدر ۱"
+                },
+                {
+                    "name" : "فولدر ۲"
+                }
+            ]
+          },
+          "documentTypes" : {
+            "type" : "array",
+            "description": "فراداده سند",
+            "items" : {
+                "$ref": "#/Formable"
+            }
+          },
+          "labelUIDs" : {
+            "type" : "array",
+            "description": "شناسه‌های برچسب‌های دسته بندی",
+            "items" : {
+                "type" : "string",
+                "example" : "ea2eb99e-e43d-40b8-8358-10777a268990"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "تگ‌‌های سند",
+            "items" : {
+                "$ref": "#/TagData"
+            }
+          }
+        },
+        "xml": {
+          "name": "NewDirectory"
+        }
+      },
+    "Hyperlink": {
+        "required": [
+          "name",
+          "link"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description" : "نام هایپرلینک",
+            "example": "نامه صورت وضعیت"
+          },
+          "link": {
+            "type": "string",
+            "description": "آدرس اینترنتی هایپرلینک",
+            "example": "https://google.com"
+          },
+          "folder_path" : {
+            "type" : "array",
+            "description" : "مسیر قرار گیری پوشه (در صورتی که این فیلد ارسال شود، پوشه جدید در سلسله پوشه‌های ارسال شده، ذیل پوشه پدر که در آدرس وب‌سرویس ارسال شده (ترتیب ارسال مهم است، زیرا این ساختار به صورت درختی ساخته می‌شود) در این فیلد ساخته می‌شود، درصورتی که هر سطح یک از این ساختار وجود نداشته باشد، پوشه‌ای با آن نام ساخته می‌شود.)",
+            "items" : {
+                "$ref": "#/FolderPath"
+            },
+            "example" : [
+                {
+                    "name" : "مدارک فنی"
+                },
+                {
+                    "name" : "فولدر ۱"
+                },
+                {
+                    "name" : "فولدر ۲"
+                }
+            ]
+          },
+          "documentTypes" : {
+            "type" : "array",
+            "description": "فراداده سند",
+            "items" : {
+                "$ref": "#/Formable"
+            }
+          },
+          "labelUIDs" : {
+            "type" : "array",
+            "description": "شناسه‌های برچسب‌های دسته بندی",
+            "items" : {
+                "type" : "string",
+                "example" : "شناسه برچسب"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "تگ‌‌های سند",
+            "items" : {
+                "$ref": "#/TagData"
+            }
+          }
+        },
+        "xml": {
+          "name": "Hyperlink"
+        }
+      },
+      "UploadFile": {
+        "required": [
+          "name"
+        ],
+        "description" : "ریکوست به فرمت جیسون در فرم دیتا ارسال می‌شود.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "نام سند",
+            "example": "تصویر نامه قرارداد"
+          },
+          "folder_path" : {
+            "type" : "array",
+            "description" : "مسیر قرار گیری پوشه (در صورتی که این فیلد ارسال شود، پوشه جدید در سلسله پوشه‌های ارسال شده، ذیل پوشه پدر که در آدرس وب‌سرویس ارسال شده (ترتیب ارسال مهم است، زیرا این ساختار به صورت درختی ساخته می‌شود) در این فیلد ساخته می‌شود، درصورتی که هر سطح یک از این ساختار وجود نداشته باشد، پوشه‌ای با آن نام ساخته می‌شود.)",
+            "items" : {
+                "$ref": "#/FolderPath"
+            }
+          },
+          "documentTypes" : {
+            "type" : "array",
+            "description": "فراداده سند",
+            "items" : {
+                "$ref": "#/Formable"
+            }
+          },
+          "labelUIDs" : {
+            "type" : "array",
+            "description": "شناسه‌های برچسب‌های دسته بندی",
+            "items" : {
+                "type" : "string",
+                "example" : "شناسه برچسب"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "description" : "تگ‌‌های سند",
+            "items" : {
+                "$ref": "#/TagData"
+            }
+          }
+        },
+        "xml": {
+          "name": "UploadFile"
+        }
+      },
+      "FolderPath" : {
+            "properties" : {
+                "name" : {
+                    "type" : "string",
+                    "description" : "نام پوشه (ترتیب ارسال این فیلد در لیست مهم است زیرا هر پوشه به صورت درختی ساخته می‌شود)",
+                    "example" : "قرارداد‌ کاتب"
+                }
+            }
+      },
+      "DirectoryShareLink" : {
+        "description": "اطلاعات پوشه جهت ساخت لینک اشتراک‌گذاری(فقط یکی از موارد شناسه یا مسیر پوشه باید ارسال گردند.)",
+        "properties" : {
+            "nodeUID" : {
+                "type" : "string",
+                "description" : "شناسه پوشه جهت ساخت لینک",
+                "example" : "48f38962-266e-4578-a685-269388033c7b"
+            },
+            "path" : {
+                "type" : "string",
+                "description" : "آدرس پوشه جهت ساخت لینک",
+                "example" : "/سازمان‌ها/قراردادها/۱"
+            }
+        }
+      },
+      "Formable" : {
+        "properties" : {
+            "entityTypeKey" : {
+                "type" : "string",
+                "description" : "شناسه فرم فراداده(این کلید یکتا در هنگام ساخت فراداده در سامانه داکتیو توسط کاربر مشخص می‌شود.)",
+                "example" : "contract"
+            },
+            "entityInstance" : {
+                "type" : "object",
+                "$ref": "#/EntityInstanceSample"
+            }
+        }
+      },
+      "EntityInstanceSample": {
+        "description" : "محتوای فراداده(در این آبجکت، محتوای فراداده که توسط فرم‌ساز سامانه ساخته شده‌اند ارسال می‌شود، فیلدهای مختلف با استفاده از کلید یکتای آن‌ها مشخص می‌شوند.)(نکته: نمونه‌های موجود در این آبجکت صرفا جهت نمونه بوده و مقادیر کلیدهای اصلی باید از سامانه داکتیو و یا وب‌سرویس‌های دریافت لیست فرداده و دریافت ساختار فراداده، که مستندات آن در همین سامانه در دسترسی است، استخراج شوند.)",
+        "properties": {
+            "testform_SF_721_SingleTextField_14531": {
+                "type": "string",
+                "description": "پیمانکار"
+            },
+            "viewGroup1_DateField_44001": {
+                "type": "integer",
+                "description": "تاریخ قرارداد"
+            },
+            "testform_SF_721_SingleTextField_69145": {
+                "type": "string",
+                "description": "کارفرما"
+            },
+            "viewGroup1_NumericalField_41235": {
+                "type": "integer",
+                "description": "مبلغ قرارداد"
+            },
+            "testform_SF_721_SingleTextField_12351": {
+                "type": "string",
+                "description": "عنوان قرارداد"
+            }
+        }
+      },
+      "TagData" : {
+        "properties" : {
+            "text" : {
+                "type" : "string",
+                "description" : "(در صورتی که برچسب از قبل وجود نداشته باشد ساخته و در غیر این صورت از برچسب‌های قبلی استفاده می‌شود)متن تگ",
+                "example" : "قرارداد"
+            }
+        }
+    },
+      "securityDefinitions" : {
+            "Bearer" : {
+                "type" : "http",
+                "name" : "Authorization",
+                "in" : "header"
+            },
+            "basicAuth" : {
+                "type" : "basic"
+            }
+      },
+    "components": {
+        "securitySchemes": {
+            "JWTAuth": {
+                "type": "http",
+                "description": "Authorization: Bearer <token>",
+                "scheme": "Bearer",
+                "bearerFormat": "5022ffa1-bd7e-4fda-b1e9-4ded7799ad8"
+            }
+        },
+        "schemas": {},
+        "responses": {},
+        "parameters": {}
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "tags": [],
+    "servers": [
+        {
+            "url": "https://api.example.io"
+        }
+    ],
+    "externalDocs": {
+        "url": ""
+    }
+}

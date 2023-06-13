@@ -60,7 +60,7 @@ export function SecurityRequirements(props: SecurityRequirementsProps) {
             <h5>
               <LockIcon /> {AUTH_TYPES[scheme.type] || scheme.type}: {scheme.id}
             </h5>
-            <Markdown source={scheme.description || ''} />
+            <Markdown source={scheme.description || ''} className={scheme.descriptionClass} />
             <SecurityDetails
               key={scheme.id}
               scheme={scheme}

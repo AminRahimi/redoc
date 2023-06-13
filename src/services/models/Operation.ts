@@ -51,6 +51,7 @@ export class OperationModel implements IMenuItem {
   name: string;
   sidebarLabel: string;
   description?: string;
+  descriptionClass?: string;
   type = 'operation' as const;
 
   parent?: GroupModel;

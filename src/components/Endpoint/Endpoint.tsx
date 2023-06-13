@@ -70,7 +70,7 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
                 const basePath = getBasePath(normalizedUrl);
                 return (
                   <ServerItem key={normalizedUrl}>
-                    <Markdown source={server.description || ''} compact={true} />
+                    <Markdown source={server.description || ''} className={server.descriptionClass}  compact={true} />
                     <SelectOnClick>
                       <ServerUrl>
                         <span>

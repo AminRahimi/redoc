@@ -7,7 +7,9 @@ const externalExamplesCache: { [url: string]: Promise<any> } = {};
 export class ExampleModel {
   value: any;
   summary?: string;
+  summaryClass?: string;
   description?: string;
+  descriptionClass?: string;
   externalValueUrl?: string;
 
   constructor(
@@ -19,7 +21,9 @@ export class ExampleModel {
     const { resolved: example } = parser.deref(infoOrRef);
     this.value = example.value;
     this.summary = example.summary;
+    this.summaryClass = example.summaryClass;
     this.description = example.description;
+    this.descriptionClass = example.descriptionClass;
     if (example.externalValue) {
       this.externalValueUrl = new URL(example.externalValue, parser.specUrl).href;
     }

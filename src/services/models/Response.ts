@@ -24,6 +24,7 @@ export class ResponseModel {
   content?: MediaContentModel;
   code: string;
   summary: string;
+  summaryClass?: string;
   description: string;
   descriptionClass?: string;
   type: string;
@@ -55,6 +56,7 @@ export class ResponseModel {
       this.summary = info.description || '';
       this.description = '';
     }
+    this.descriptionClass = info.descriptionClass || '';
 
     this.type = getStatusCodeType(code, defaultAsError);
 
